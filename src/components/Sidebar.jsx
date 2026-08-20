@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, CalendarCheck, Users, 
-  CalendarDays, Tv, Settings, Sparkles, UserCheck, Flame
+  CalendarDays, Tv, HeartHandshake, FileText, Settings, Sparkles, UserCheck, Flame
 } from 'lucide-react';
 
 export default function Sidebar({ activeTab, setActiveTab }) {
@@ -46,6 +46,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
     { id: 'prayer', label: 'Prayer', icon: Flame },
     { id: 'events', label: 'Events', icon: CalendarDays },
     { id: 'livestream', label: 'Live Stream', icon: Tv, isLiveBadge: true },
+    { id: 'reports', label: 'Reports', icon: FileText },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
