@@ -6,7 +6,7 @@ import MainDashboard from './pages/MainDashboard';
 import MembersDashboard from './pages/MembersDashboard';
 import AttendanceDashboard from './pages/AttendanceDashboard';
 import VisitorsDashboard from './pages/VisitorsDashboard';
-import EventsDashboard from './pages/EventsDashboard'; // 1. சரியான Import
+import EventsDashboard from './pages/EventsDashboard'; // 
 import LiveStreamDashboard from './pages/LiveStreamDashboard';
 import PrayerDashboard from './pages/PrayerDashboard';
 
@@ -24,8 +24,8 @@ export default function App() {
         <div className="shrink-0 pt-4 pb-4 px-8">
           <Header 
             activeTab={activeTab} 
-            currentChurchName="Nope Search Main Cathedral" 
-            pastorName="Rev. Senior Pastor" 
+            currentChurchName="Cathedral Main Headquarters" 
+            pastorName="Senior Pastor & Pastoral Board"
           />
         </div>
 
@@ -39,7 +39,7 @@ export default function App() {
           )}
           {activeTab === 'visitors' && <VisitorsDashboard onNavigateTab={setActiveTab} />}
           
-          {/* 2. Events கண்டிஷன் (எல்லா விதமான Key-களுக்கும்): */}
+          {/* 2. Events  */}
           {(activeTab === 'events' || activeTab === 'event' || activeTab === 'events_dashboard' || activeTab === 'calendar') && (
             <EventsDashboard onNavigateTab={setActiveTab} />
           )}

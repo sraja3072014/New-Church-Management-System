@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Users, Building2, TrendingUp, DollarSign, 
-  CalendarCheck, ArrowUpRight, Sparkles, Filter, 
-  ChevronRight, Receipt, Wallet, HeartHandshake, X, Search, Check, 
+  CalendarCheck, ArrowUpRight, Sparkles, Receipt, 
+  Wallet, HeartHandshake, X, Search, Check, 
   Clock, BarChart2, UserCheck, Activity, Phone, AlertCircle, Info, Landmark
 } from 'lucide-react';
 
@@ -164,8 +164,10 @@ export default function MainDashboard({ onNavigateTab }) {
   return (
     <div className="space-y-6 animate-fadeIn pb-12 w-full select-none text-slate-200">
       
-      {/* 1. TOP 4 METRIC TILES */}
+      {/* 1. TOP 4 METRIC TILES (REORDERED: ATTENDANCE & HOUSEHOLDS LEFT, GIVING & RESERVES RIGHT) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        {/* Card 1: Global Attendance (Left 1) */}
         <div className="p-5 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl space-y-2 backdrop-blur-xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-400">Global Congregation Attendance</span>
@@ -177,6 +179,19 @@ export default function MainDashboard({ onNavigateTab }) {
           </div>
         </div>
 
+        {/* Card 2: Registered Households (Left 2) */}
+        <div className="p-5 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl space-y-2 backdrop-blur-xl">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-slate-400">Registered Households</span>
+            <span className="px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 text-[10px] font-bold border border-sky-500/20">+4.1%</span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <div className="text-3xl font-black text-white font-mono">{families.length > 0 ? families.length : 84}</div>
+            <span className="text-[10px] text-slate-400">families enrolled</span>
+          </div>
+        </div>
+
+        {/* Card 3: Total Kingdom Giving (Right 1) */}
         <div className="p-5 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl space-y-2 backdrop-blur-xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-400">Total Kingdom Giving MTD</span>
@@ -184,21 +199,11 @@ export default function MainDashboard({ onNavigateTab }) {
           </div>
           <div className="flex items-baseline gap-2">
             <div className="text-3xl font-black text-white font-mono">₹1,42,500</div>
-            <span className="text-[10px] text-slate-400">INR</span>
+            <span className="text-[10px] text-slate-400">INR Inflow</span>
           </div>
         </div>
 
-        <div className="p-5 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl space-y-2 backdrop-blur-xl">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400">Registered Households</span>
-            <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">+4.1%</span>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <div className="text-3xl font-black text-white font-mono">{families.length > 0 ? families.length : 84}</div>
-            <span className="text-[10px] text-slate-400">families</span>
-          </div>
-        </div>
-
+        {/* Card 4: Net Reserve Liquidity (Right 2) */}
         <div className="p-5 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl space-y-2 backdrop-blur-xl">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-slate-400">Net Reserve Liquidity</span>
@@ -209,51 +214,58 @@ export default function MainDashboard({ onNavigateTab }) {
             <span className="text-[10px] text-slate-400">audited surplus</span>
           </div>
         </div>
+
       </div>
 
-      {/* 2. MIDDLE SECTION: AT A GLANCE, MEMBER ENGAGEMENT & CRITICAL CARE ALERTS */}
+      {/* 2. MIDDLE SECTION: GROUPED COMPACT BOXES (BOX 1 & BOX 2) + CRITICAL CARE */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* LEFT 2 COLUMNS: AT A GLANCE & MEMBER ENGAGEMENT (EXACT IMAGE REPLICATION) */}
+        {/* LEFT 2 COLUMNS: SPLIT INTO TWO CLEAN GROUPED BOXES */}
         <div className="lg:col-span-2 space-y-6">
           
-          {/* CARD 1: AT A GLANCE */}
+          {/* BOX 1: AT A GLANCE (COMPACT 3-PILLAR WAVE DYNAMICS) */}
           <div className="p-6 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl backdrop-blur-xl space-y-4">
-            <h3 className="text-base font-bold text-white tracking-wide">At a Glance</h3>
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="text-base font-bold text-white tracking-wide flex items-center gap-2">
+                <Sparkles className="text-orange-400" size={16} />
+                <span>At a Glance Overview</span>
+              </h3>
+              <span className="text-[10px] font-bold text-slate-400 font-mono">Live KPI Trajectory</span>
+            </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2 items-center text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1 items-center text-center">
               
-              {/* Active Households */}
-              <div className="space-y-2 flex flex-col items-center">
+              {/* Active Households Wave */}
+              <div className="space-y-1.5 flex flex-col items-center p-3 rounded-2xl bg-black/20 border border-white/5">
                 <span className="text-xs font-bold text-slate-400">Active Households</span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">(+12%)</span>
-                <div className="w-24 h-8">
+                <span className="text-xs font-bold text-sky-400 font-mono">(+12%)</span>
+                <div className="w-20 h-6">
                   <svg className="w-full h-full fill-none stroke-sky-400" viewBox="0 0 100 30">
-                    <path d="M 0,20 Q 30,5 50,15 T 100,10" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 0,20 Q 30,5 50,15 T 100,10" strokeWidth="3" strokeLinecap="round" />
                   </svg>
                 </div>
               </div>
 
               {/* Last Sunday Attendance */}
-              <div className="space-y-1 flex flex-col items-center border-y sm:border-y-0 sm:border-x border-white/10 py-3 sm:py-0">
+              <div className="space-y-1 flex flex-col items-center p-3 rounded-2xl bg-black/20 border border-white/5">
                 <span className="text-xs font-bold text-slate-400">Last Sunday Attendance</span>
-                <div className="text-3xl font-black text-white font-mono">541</div>
+                <div className="text-2xl font-black text-white font-mono">541</div>
                 <span className="text-[10px] text-slate-400 font-medium">(Adults: 410, Kids: 131)</span>
-                <div className="w-24 h-6 mt-1">
+                <div className="w-20 h-5 mt-0.5">
                   <svg className="w-full h-full fill-none stroke-indigo-400" viewBox="0 0 100 30">
-                    <path d="M 0,25 Q 35,28 60,10 T 100,15" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 0,25 Q 35,28 60,10 T 100,15" strokeWidth="3" strokeLinecap="round" />
                   </svg>
                 </div>
               </div>
 
               {/* Average Giving */}
-              <div className="space-y-1 flex flex-col items-center">
+              <div className="space-y-1 flex flex-col items-center p-3 rounded-2xl bg-black/20 border border-white/5">
                 <span className="text-xs font-bold text-slate-400">Average Giving (Last 4 Wks)</span>
-                <div className="text-2xl font-black text-white font-mono">₹</div>
+                <div className="text-2xl font-black text-emerald-400 font-mono">₹</div>
                 <span className="text-xs font-bold text-emerald-400 font-mono">(110% of goal)</span>
-                <div className="w-24 h-6 mt-1">
+                <div className="w-20 h-5 mt-0.5">
                   <svg className="w-full h-full fill-none stroke-emerald-400" viewBox="0 0 100 30">
-                    <path d="M 0,22 Q 30,25 60,18 T 100,8" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 0,22 Q 30,25 60,18 T 100,8" strokeWidth="3" strokeLinecap="round" />
                   </svg>
                 </div>
               </div>
@@ -261,15 +273,18 @@ export default function MainDashboard({ onNavigateTab }) {
             </div>
           </div>
 
-          {/* CARD 2: MEMBER ENGAGEMENT */}
+          {/* BOX 2: MEMBER ENGAGEMENT & PATHWAYS ALERT */}
           <div className="p-6 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl backdrop-blur-xl space-y-4">
-            <h3 className="text-base font-bold text-white tracking-wide">Member Engagement</h3>
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="text-base font-bold text-white tracking-wide">Member Engagement</h3>
+              <span className="text-[10px] text-emerald-400 font-bold font-mono">Optimal Participation</span>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center pt-1">
               
-              {/* Circular Ring Gauge (68%) */}
+              {/* Circular Gauge Ring (68%) */}
               <div className="flex flex-col items-center space-y-2">
-                <div className="relative w-24 h-24 flex items-center justify-center">
+                <div className="relative w-22 h-22 flex items-center justify-center">
                   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                     <path
                       className="text-slate-800"
@@ -361,10 +376,10 @@ export default function MainDashboard({ onNavigateTab }) {
 
       </div>
 
-      {/* 3. BOTTOM SECTION: MULTI-BRANCH TREASURY & VISITOR ENGAGEMENT PIPELINE (WITH EMBEDDED LAUNCH MARKER) */}
+      {/* 3. BOTTOM SECTION: MULTI-BRANCH TREASURY & VISITOR ENGAGEMENT PIPELINE */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        {/* MULTI-BRANCH BANK TREASURY SPLIT */}
+        {/* MULTI-BRANCH TREASURY SPLIT */}
         <div className="p-6 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl backdrop-blur-xl space-y-5">
           <div className="border-b border-white/10 pb-3 flex items-center justify-between">
             <div>
@@ -399,11 +414,10 @@ export default function MainDashboard({ onNavigateTab }) {
           </div>
         </div>
 
-        {/* VISITOR ENGAGEMENT PIPELINE (WITH INTEGRATED LAUNCH ATTENDANCE MARKER BUTTON) */}
+        {/* VISITOR ENGAGEMENT PIPELINE (WITH LAUNCH ATTENDANCE BUTTON IN HEADER) */}
         <div className="p-6 rounded-3xl bg-slate-900/80 border border-white/10 shadow-xl backdrop-blur-xl space-y-4 flex flex-col justify-between">
           <div className="space-y-4">
             
-            {/* Header with Moved Launch Attendance Marker Button */}
             <div className="border-b border-white/10 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h4 className="text-sm font-bold text-white flex items-center gap-2">
@@ -413,7 +427,7 @@ export default function MainDashboard({ onNavigateTab }) {
                 <p className="text-xs text-slate-400 mt-0.5">Track progress pipelines from first connection to integration</p>
               </div>
 
-              {/* LAUNCH ATTENDANCE MARKER BUTTON (MOVED HERE AS REQUESTED) */}
+              {/* LAUNCH ATTENDANCE MARKER BUTTON */}
               <button
                 type="button"
                 onClick={() => setIsAttendanceModalOpen(true)}
@@ -424,7 +438,7 @@ export default function MainDashboard({ onNavigateTab }) {
               </button>
             </div>
 
-            {/* Clean Pipeline Stage Tiles (Clicking directly opens the visitors pipeline) */}
+            {/* Clean Pipeline Stage Tiles (Clicking directly opens visitors page) */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
               
               <div 
