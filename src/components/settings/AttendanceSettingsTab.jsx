@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 
 export default function AttendanceSettingsTab({ onTriggerSuccess }) {
-  // 1. Service Sessions Master with Multi-Campus & Tracking Mode
+  // 1. Service Sessions Master with Multi-Campus & Tracking Mode[cite: 5]
   const [serviceSessions, setServiceSessions] = useState(() => {
     const saved = localStorage.getItem('app_attendance_sessions');
     if (saved) {
@@ -21,7 +21,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
     ];
   });
 
-  // 2. Attendance Rules & Hardware Workflow Config
+  // 2. Attendance Rules & Hardware Workflow Config[cite: 5]
   const [attendanceConfig, setAttendanceConfig] = useState(() => {
     const saved = localStorage.getItem('app_attendance_config');
     if (saved) {
@@ -39,7 +39,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
     };
   });
 
-  // Modal State
+  // Modal State[cite: 5]
   const [isSessionModalOpen, setIsSessionModalOpen] = useState(false);
   const [editingSessionId, setEditingSessionId] = useState(null);
   const [sessionForm, setSessionForm] = useState({
@@ -52,7 +52,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
     expectedCapacity: 500
   });
 
-  // Master Save Handler
+  // Master Save Handler[cite: 5]
   const handleSaveAll = (e) => {
     if (e) e.preventDefault();
     localStorage.setItem('app_attendance_sessions', JSON.stringify(serviceSessions));
@@ -60,7 +60,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
     onTriggerSuccess('Attendance Sessions, QR Scanning Modes & Care Rules saved!');
   };
 
-  // Session Handlers
+  // Session Handlers[cite: 5]
   const handleOpenSessionModal = (session = null) => {
     if (session) {
       setEditingSessionId(session.id);
@@ -129,7 +129,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
     <div className="space-y-6 animate-fadeIn pb-8">
       <form onSubmit={handleSaveAll} className="space-y-6">
 
-        {/* Master Top Card */}
+        {/* Master Top Card[cite: 5] */}
         <div className="glass-card rounded-3xl p-8 space-y-6">
           <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -138,23 +138,24 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 Worship Service Sessions & Attendance Master
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                Configure worship slots, QR check-in scanners, child safety pickup codes, and automated absentee tracking
+                Configure worship slots, QR check-in scanners, child safety pickup codes, and automated absentee tracking[cite: 5]
               </p>
             </div>
 
+            {/* Glowing Buttons Header */}
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => handleOpenSessionModal()}
-                className="flex items-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold border border-white/10 cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 cursor-pointer transition-all active:scale-95 shrink-0"
               >
-                <Plus size={14} />
+                <Plus size={15} />
                 <span>+ Add Service Slot</span>
               </button>
 
               <button
                 type="submit"
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_20px_rgba(255,107,0,0.45)] border border-white/20 cursor-pointer transition-all active:scale-95 shrink-0"
               >
                 <Save size={15} />
                 <span>Save All Rules</span>
@@ -162,7 +163,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
             </div>
           </div>
 
-          {/* 1. Service Sessions Master Table */}
+          {/* 1. Service Sessions Master Table[cite: 5] */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
@@ -170,7 +171,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 <span>1. Active Worship Sessions & Multi-Campus Schedules</span>
               </h4>
               <span className="text-[11px] text-slate-400 font-mono">
-                {serviceSessions.filter(s => s.isActive).length} Active Services
+                {serviceSessions.filter(s => s.isActive).length} Active Services[cite: 5]
               </span>
             </div>
 
@@ -225,7 +226,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                           <button
                             type="button"
                             onClick={() => handleOpenSessionModal(session)}
-                            className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 cursor-pointer"
+                            className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 cursor-pointer transition-all active:scale-95"
                             title="Edit Slot"
                           >
                             <Edit2 size={13} />
@@ -233,7 +234,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                           <button
                             type="button"
                             onClick={() => handleDeleteSession(session.id)}
-                            className="p-2 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 cursor-pointer"
+                            className="p-2 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 cursor-pointer transition-all active:scale-95"
                             title="Delete Slot"
                           >
                             <Trash2 size={13} />
@@ -247,7 +248,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
             </div>
           </div>
 
-          {/* 2. QR Scanner & Check-in Hardware Modes */}
+          {/* 2. QR Scanner & Check-in Hardware Modes[cite: 5] */}
           <div className="space-y-4 pt-4 border-t border-white/10">
             <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
               <QrCode size={15} />
@@ -255,7 +256,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
             </h4>
 
             <div className="space-y-3">
-              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5">
+              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-orange-500/30 transition-all">
                 <input
                   type="checkbox"
                   checked={attendanceConfig.enableQrKioskCheckin}
@@ -264,11 +265,11 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 />
                 <div>
                   <span className="font-bold text-white block">Enable Self-Service QR Kiosk Scanner Mode at Church Entrances</span>
-                  <span className="text-[11px] text-slate-400">Allows believers to scan their Digital Member QR code using entrance tablets</span>
+                  <span className="text-[11px] text-slate-400">Allows believers to scan their Digital Member QR code using entrance tablets[cite: 5]</span>
                 </div>
               </label>
 
-              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5">
+              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-orange-500/30 transition-all">
                 <input
                   type="checkbox"
                   checked={attendanceConfig.enableFamilyOneClickCheckin}
@@ -277,11 +278,11 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 />
                 <div>
                   <span className="font-bold text-white block">Family Fast-Track 1-Click Check-in</span>
-                  <span className="text-[11px] text-slate-400">Scanning household head's card provides a single button to mark all family members present</span>
+                  <span className="text-[11px] text-slate-400">Scanning household head's card provides a single button to mark all family members present[cite: 5]</span>
                 </div>
               </label>
 
-              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5">
+              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-orange-500/30 transition-all">
                 <input
                   type="checkbox"
                   checked={attendanceConfig.allowHeadcountEntry}
@@ -290,11 +291,11 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 />
                 <div>
                   <span className="font-bold text-white block">Enable Fast Headcount Entry (Men / Women / Children Counters)</span>
-                  <span className="text-[11px] text-slate-400">Allows ushers to record total auditorium crowd without individual names for large conventions</span>
+                  <span className="text-[11px] text-slate-400">Allows ushers to record total auditorium crowd without individual names for large conventions[cite: 5]</span>
                 </div>
               </label>
 
-              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5">
+              <label className="flex items-center gap-3 text-xs text-slate-300 cursor-pointer p-3.5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-orange-500/30 transition-all">
                 <input
                   type="checkbox"
                   checked={attendanceConfig.preventDuplicateCheckinSameService}
@@ -303,13 +304,13 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 />
                 <div>
                   <span className="font-bold text-white block">Prevent Duplicate Check-in during Same Service Slot</span>
-                  <span className="text-[11px] text-slate-400">Alerts usher if a believer card is scanned multiple times within 60 minutes</span>
+                  <span className="text-[11px] text-slate-400">Alerts usher if a believer card is scanned multiple times within 60 minutes[cite: 5]</span>
                 </div>
               </label>
             </div>
           </div>
 
-          {/* 3. Sunday School & Child Safety Security */}
+          {/* 3. Sunday School & Child Safety Security[cite: 5] */}
           <div className="space-y-4 pt-4 border-t border-white/10">
             <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
               <Baby size={15} />
@@ -326,13 +327,13 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 />
                 <div>
                   <span className="font-bold text-white block">Generate Secure Guardian Matching Code on Child Check-in</span>
-                  <span className="text-[11px] text-slate-400">Sends a 4-digit security token to parent; child is only released when code matches teacher terminal</span>
+                  <span className="text-[11px] text-slate-400">Sends a 4-digit security token to parent; child is only released when code matches teacher terminal[cite: 5]</span>
                 </div>
               </label>
             </div>
           </div>
 
-          {/* 4. Absentee Detection & Pastoral Alerts */}
+          {/* 4. Absentee Detection & Pastoral Alerts[cite: 5] */}
           <div className="space-y-4 pt-4 border-t border-white/10">
             <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
               <ShieldCheck size={15} />
@@ -361,7 +362,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                     onChange={(e) => setAttendanceConfig({ ...attendanceConfig, autoAssignAbsenteeVisitTask: e.target.checked })}
                     className="w-4 h-4 accent-orange-500 rounded cursor-pointer"
                   />
-                  <span>Auto-create Pastoral Home Visit Task for Area Cell Leader</span>
+                  <span>Auto-create Pastoral Home Visit Task for Area Cell Leader[cite: 5]</span>
                 </label>
 
                 <label className="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer">
@@ -371,7 +372,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                     onChange={(e) => setAttendanceConfig({ ...attendanceConfig, sendAbsenteeCareSms: e.target.checked })}
                     className="w-4 h-4 accent-orange-500 rounded cursor-pointer"
                   />
-                  <span>Send "We Missed You" caring WhatsApp greeting on Monday morning</span>
+                  <span>Send "We Missed You" caring WhatsApp greeting on Monday morning[cite: 5]</span>
                 </label>
               </div>
             </div>
@@ -381,7 +382,7 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
           <div className="flex justify-end pt-3 border-t border-white/10">
             <button
               type="submit"
-              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white text-xs font-bold rounded-2xl shadow-lg shadow-orange-500/25 cursor-pointer"
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white text-xs font-bold rounded-2xl shadow-[0_0_20px_rgba(255,107,0,0.45)] border border-white/20 cursor-pointer transition-all active:scale-95"
             >
               <Save size={15} />
               <span>Save & Apply Attendance Rules</span>
@@ -392,14 +393,14 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
 
       </form>
 
-      {/* Add / Edit Service Session Modal */}
+      {/* Add / Edit Service Session Modal[cite: 5] */}
       {isSessionModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
           <div className="glass-panel w-full max-w-lg p-6 rounded-3xl border border-white/25 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <h3 className="text-base font-bold text-white flex items-center gap-2">
                 <Calendar className="text-orange-400" size={18} />
-                {editingSessionId ? 'Edit Worship Service Slot' : 'Create New Service Slot'}
+                {editingSessionId ? 'Edit Worship Service Slot' : 'Create New Service Slot'}[cite: 5]
               </h3>
               <button onClick={() => setIsSessionModalOpen(false)} className="text-slate-400 hover:text-white cursor-pointer">
                 <X size={18} />
@@ -506,9 +507,9 @@ export default function AttendanceSettingsTab({ onTriggerSuccess }) {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer"
+                  className="px-5 py-2 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 cursor-pointer transition-all active:scale-95"
                 >
-                  {editingSessionId ? 'Update Session' : 'Save Session'}
+                  {editingSessionId ? 'Update Session' : 'Save Session'}[cite: 5]
                 </button>
               </div>
             </form>

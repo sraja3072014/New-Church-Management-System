@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { 
   Building2, Target, Globe, Save, Upload, ImageIcon, 
   UserCheck, IdCard, ChevronDown, Phone, Mail, Share2, 
-  Camera, Send, AtSign, MapPin 
+  Camera, Send, AtSign, MapPin, X 
 } from 'lucide-react';
 
 export default function MainChurchTab({ onTriggerSuccess }) {
@@ -97,10 +97,10 @@ export default function MainChurchTab({ onTriggerSuccess }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6 animate-fadeIn pb-10">
       {/* Top Capsule Navigation */}
-      <div className="glass-panel p-1.5 rounded-2xl flex items-center justify-between gap-2 overflow-x-auto">
-        <div className="flex items-center gap-1.5">
+      <div className="glass-panel p-2 rounded-2xl flex items-center justify-between gap-2 overflow-x-auto">
+        <div className="flex items-center gap-2">
           {[
             { id: 'profile', label: 'Church Profile', icon: Building2 },
             { id: 'vision', label: 'Vision & Mission', icon: Target },
@@ -115,23 +115,24 @@ export default function MainChurchTab({ onTriggerSuccess }) {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   isTabActive
-                    ? 'bg-white text-slate-900 shadow-md font-bold'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    ? 'bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] text-white font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 scale-[1.02]'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <Icon size={14} className={isTabActive ? 'text-orange-600' : 'text-slate-400'} />
+                <Icon size={14} className={isTabActive ? 'text-white' : 'text-orange-400/80'} />
                 <span>{tab.label}</span>
               </button>
             );
           })}
         </div>
 
+        {/* Glowing Save Button */}
         <button
           type="button"
           onClick={handleSave}
-          className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
+          className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_20px_rgba(255,107,0,0.45)] border border-white/20 cursor-pointer transition-all active:scale-95 shrink-0"
         >
-          <Save size={14} />
+          <Save size={15} />
           <span>Save Changes</span>
         </button>
       </div>
@@ -160,10 +161,11 @@ export default function MainChurchTab({ onTriggerSuccess }) {
               <div className="space-y-2">
                 <input type="file" ref={fileInputRef} onChange={handleLogoUpload} accept="image/*" className="hidden" />
                 <div className="flex items-center gap-2">
+                  {/* Glowing Upload Button */}
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold border border-white/10 cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 cursor-pointer transition-all active:scale-95"
                   >
                     <Upload size={14} />
                     <span>{churchLogo ? 'Change Logo' : 'Upload Logo'}</span>
@@ -172,7 +174,7 @@ export default function MainChurchTab({ onTriggerSuccess }) {
                     <button
                       type="button"
                       onClick={() => { setChurchLogo(null); localStorage.removeItem('app_main_church_logo'); window.dispatchEvent(new Event('churchDataUpdated')); }}
-                      className="px-3 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 rounded-xl text-xs font-medium border border-rose-500/20 cursor-pointer"
+                      className="px-3.5 py-2 bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 rounded-xl text-xs font-bold border border-rose-500/30 shadow-[0_0_10px_rgba(244,63,94,0.2)] cursor-pointer transition-all active:scale-95"
                     >
                       Remove
                     </button>
