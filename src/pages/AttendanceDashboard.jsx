@@ -5,13 +5,13 @@ import {
 } from 'lucide-react';
 
 export default function AttendanceDashboard({ onNavigateTab }) {
-  const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
+const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
   const [selectedService, setSelectedService] = useState('Sunday 1st Morning Service (07:00 AM)');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [toastMessage, setToastMessage] = useState('');
 
-  // 1. விசுவாசிகள் டேட்டாவை பாதுகாப்பாக ஏற்றுதல் (Default Fallback உடன்)
+  // 1. Securely loading data (with default fallback)
   const [families] = useState(() => {
     try {
       const saved = localStorage.getItem('app_members_family_database');
@@ -30,7 +30,7 @@ export default function AttendanceDashboard({ onNavigateTab }) {
     }
   });
 
-  // 2. அட்டென்டன்ஸ் ரெக்கார்ட்ஸ்
+  // 2. Attendance Records
   const [attendanceRecords, setAttendanceRecords] = useState(() => {
     try {
       const saved = localStorage.getItem(`attendance_${selectedDate}_${selectedService}`);
@@ -40,7 +40,7 @@ export default function AttendanceDashboard({ onNavigateTab }) {
     }
   });
 
-  // 3. விசிட்டர்ஸ் டேட்டா
+  // 3. Visitors Data
   const [visitors, setVisitors] = useState(() => {
     try {
       const saved = localStorage.getItem('app_visitors_database');
@@ -66,7 +66,7 @@ export default function AttendanceDashboard({ onNavigateTab }) {
     setTimeout(() => setToastMessage(''), 3000);
   };
 
-  // விசுவாசியை மார்க் செய்தல்
+  // Toggle attendance status
   const handleToggleAttendance = (memberId, name, type = 'Member') => {
     const currentStatus = attendanceRecords[memberId]?.status;
     const newStatus = currentStatus === 'Present' ? 'Absent' : 'Present';
@@ -86,7 +86,7 @@ export default function AttendanceDashboard({ onNavigateTab }) {
     localStorage.setItem(`attendance_${selectedDate}_${selectedService}`, JSON.stringify(updated));
   };
 
-  // முழு குடும்பத்தையும் மார்க் செய்தல்
+  // Toggle attendance status for the entire family
   const handleQuickFamilyMark = (fam) => {
     const head = fam?.headMember;
     const subMembers = fam?.members || [];
@@ -110,10 +110,10 @@ export default function AttendanceDashboard({ onNavigateTab }) {
 
     setAttendanceRecords(updated);
     localStorage.setItem(`attendance_${selectedDate}_${selectedService}`, JSON.stringify(updated));
-    showToast(`${fam?.familyName || 'குடும்பம்'} அனைவருக்கும் ${targetStatus} மார்க் செய்யப்பட்டது!`);
+    showToast(`${fam?.familyName || 'Family'} all marked as ${targetStatus}!`);
   };
 
-  // விசிட்டரை சேமித்தல்
+  // Saving the visitor
   const handleSaveQuickVisitor = (e) => {
     e.preventDefault();
     if (!visitorForm.name.trim() || !visitorForm.phone.trim()) return;
@@ -148,10 +148,10 @@ export default function AttendanceDashboard({ onNavigateTab }) {
 
     setIsVisitorModalOpen(false);
     setVisitorForm({ name: '', phone: '', area: '', broughtBy: '', prayerRequest: '', category: 'First Time Visitor' });
-    showToast(`புது விசுவாசி ${newVisitorData.name} சேர்க்கப்பட்டார்!`);
+    showToast(`New visitor ${newVisitorData.name} added!`);
   };
 
-  // விசுவாசிகளை பாதுகாப்பாக பிரித்தெடுத்தல் (Safe Flattening)
+  // Safely separating the believers (Safe Flattening)
   const allBelievers = [];
   (families || []).forEach(fam => {
     if (fam && fam.headMember) {
@@ -193,7 +193,7 @@ export default function AttendanceDashboard({ onNavigateTab }) {
               <span>Service Attendance & Visitor Check-in</span>
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              விசுவாசிகளின் ஆராதனை வருகைப்பதிவு மற்றும் புதிய ஆத்துமாக்களின் உடனடி வரவேற்புப் பதிவு.
+              Attendance records for believers and new visitors.
             </p>
           </div>
 

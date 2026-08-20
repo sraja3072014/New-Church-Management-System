@@ -5,6 +5,7 @@ import SettingsDashboard from './pages/SettingsDashboard';
 import MainDashboard from './pages/MainDashboard';
 import MembersDashboard from './pages/MembersDashboard';
 import AttendanceDashboard from './pages/AttendanceDashboard';
+import VisitorsDashboard from './pages/VisitorsDashboard';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
