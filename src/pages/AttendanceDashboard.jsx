@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   CalendarCheck, Users, UserPlus, CheckCircle2, 
-  Search, HeartHandshake, Check, Filter, X
+  Search, HeartHandshake, Check, Filter, X, ArrowRight
 } from 'lucide-react';
 
 export default function AttendanceDashboard({ onNavigateTab }) {
-const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
   const [selectedService, setSelectedService] = useState('Sunday 1st Morning Service (07:00 AM)');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [toastMessage, setToastMessage] = useState('');
 
-  // 1. Securely loading data (with default fallback)
+  // 1. Members Family Data Load
   const [families] = useState(() => {
     try {
       const saved = localStorage.getItem('app_members_family_database');
-      return saved ? JSON.parse(saved) : [
-        {
-          familyId: 'FAM-101',
-          familyName: 'David Kumar & Household',
-          headMember: { memberId: 'CAT-00101', name: 'David Kumar', phone: '+91 98765 11223', roleInFamily: 'Head of Family' },
-          members: [
-            { memberId: 'CAT-00102', name: 'Sarah David', phone: '+91 98765 11224', roleInFamily: 'Spouse' }
-          ]
-        }
-      ];
+      return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
@@ -66,15 +57,15 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
     setTimeout(() => setToastMessage(''), 3000);
   };
 
-  // Toggle attendance status
-  const handleToggleAttendance = (memberId, name, type = 'Member') => {
-    const currentStatus = attendanceRecords[memberId]?.status;
+  // Mark Member Present/Absent
+  const handleToggleAttendance = (uniqueId, name, type = 'Member') => {
+    const currentStatus = attendanceRecords[uniqueId]?.status;
     const newStatus = currentStatus === 'Present' ? 'Absent' : 'Present';
 
     const updated = {
       ...attendanceRecords,
-      [memberId]: {
-        memberId,
+      [uniqueId]: {
+        memberId: uniqueId,
         name,
         type,
         status: newStatus,
@@ -86,34 +77,45 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
     localStorage.setItem(`attendance_${selectedDate}_${selectedService}`, JSON.stringify(updated));
   };
 
-  // Toggle attendance status for the entire family
-  const handleQuickFamilyMark = (fam) => {
-    const head = fam?.headMember;
-    const subMembers = fam?.members || [];
-    const allFamMembers = head ? [head, ...subMembers] : [...subMembers];
+  // Quick Whole Family Mark
+  const handleQuickFamilyMark = (fam, fIdx) => {
+    const fId = fam?.familyId || `FAM-${fIdx + 101}`;
+    const allMembersInFam = [];
 
-    const isAllPresent = allFamMembers.every(m => attendanceRecords[m?.memberId]?.status === 'Present');
+    if (fam?.headMember) {
+      allMembersInFam.push({
+        id: `HEAD_${fId}_${fam.headMember.memberId || fam.headMember.name}`,
+        name: fam.headMember.name
+      });
+    }
+
+    (fam?.members || []).forEach((m, mIdx) => {
+      allMembersInFam.push({
+        id: `SUB_${fId}_IDX${mIdx}_${m.memberId || m.name}`,
+        name: m.name
+      });
+    });
+
+    const isAllPresent = allMembersInFam.every(m => attendanceRecords[m.id]?.status === 'Present');
     const targetStatus = isAllPresent ? 'Absent' : 'Present';
 
     const updated = { ...attendanceRecords };
-    allFamMembers.forEach(m => {
-      if (m?.memberId) {
-        updated[m.memberId] = {
-          memberId: m.memberId,
-          name: m.name,
-          type: 'Member',
-          status: targetStatus,
-          markedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        };
-      }
+    allMembersInFam.forEach(m => {
+      updated[m.id] = {
+        memberId: m.id,
+        name: m.name,
+        type: 'Member',
+        status: targetStatus,
+        markedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
     });
 
     setAttendanceRecords(updated);
     localStorage.setItem(`attendance_${selectedDate}_${selectedService}`, JSON.stringify(updated));
-    showToast(`${fam?.familyName || 'Family'} all marked as ${targetStatus}!`);
+    showToast(`${fam?.familyName || 'Family'} marked as ${targetStatus}!`);
   };
 
-  // Saving the visitor
+  // Save New Visitor
   const handleSaveQuickVisitor = (e) => {
     e.preventDefault();
     if (!visitorForm.name.trim() || !visitorForm.phone.trim()) return;
@@ -125,7 +127,7 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
       ...visitorForm,
       firstVisitDate: selectedDate,
       serviceAttended: selectedService,
-      followUpStage: 'New Contact',
+      followUpStage: 'new_contact',
       createdAt: new Date().toISOString()
     };
 
@@ -148,18 +150,35 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
 
     setIsVisitorModalOpen(false);
     setVisitorForm({ name: '', phone: '', area: '', broughtBy: '', prayerRequest: '', category: 'First Time Visitor' });
-    showToast(`New visitor ${newVisitorData.name} added!`);
+    showToast(`Visitor ${newVisitorData.name} checked-in!`);
   };
 
-  // Safely separating the believers (Safe Flattening)
+  // Safe Flat List of Believers with strict unique keys
   const allBelievers = [];
-  (families || []).forEach(fam => {
-    if (fam && fam.headMember) {
-      allBelievers.push({ ...fam.headMember, familyName: fam.familyName, isHead: true, rawFamily: fam });
+  (families || []).forEach((fam, fIdx) => {
+    const fId = fam?.familyId || `FAM-${fIdx + 101}`;
+
+    if (fam?.headMember) {
+      allBelievers.push({
+        ...fam.headMember,
+        uniqueId: `HEAD_${fId}_${fam.headMember.memberId || fam.headMember.name}`,
+        familyName: fam.familyName || 'Family Unit',
+        isHead: true,
+        rawFamily: fam,
+        famIndex: fIdx
+      });
     }
-    if (fam && Array.isArray(fam.members)) {
-      fam.members.forEach(mem => {
-        if (mem) allBelievers.push({ ...mem, familyName: fam.familyName, isHead: false, rawFamily: fam });
+
+    if (fam?.members && Array.isArray(fam.members)) {
+      fam.members.forEach((mem, mIdx) => {
+        allBelievers.push({
+          ...mem,
+          uniqueId: `SUB_${fId}_IDX${mIdx}_${mem.memberId || mem.name}`,
+          familyName: fam.familyName || 'Family Unit',
+          isHead: false,
+          rawFamily: fam,
+          famIndex: fIdx
+        });
       });
     }
   });
@@ -193,7 +212,7 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
               <span>Service Attendance & Visitor Check-in</span>
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              Attendance records for believers and new visitors.
+              Live attendance tracking, family household roll-calls, and visitor intake registry.
             </p>
           </div>
 
@@ -250,7 +269,7 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
             <input
               type="text"
-              placeholder="Search by Name or Phone..."
+              placeholder="Search by Name, Family, or Phone..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-slate-900 border border-white/10 rounded-2xl pl-10 pr-4 py-2 text-xs text-slate-200 focus:outline-none focus:border-orange-500 font-medium"
@@ -293,26 +312,26 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
               {activeTab !== 'visitors' && allBelievers
                 .filter(b => {
                   const q = searchQuery.toLowerCase();
-                  return b.name?.toLowerCase().includes(q) || (b.phone && b.phone.includes(q));
+                  return b.name?.toLowerCase().includes(q) || b.familyName?.toLowerCase().includes(q) || (b.phone && b.phone.includes(q));
                 })
                 .map((believer) => {
-                  const isPresent = attendanceRecords[believer.memberId]?.status === 'Present';
+                  const isPresent = attendanceRecords[believer.uniqueId]?.status === 'Present';
 
                   return (
-                    <tr key={believer.memberId} className="hover:bg-white/[0.02]">
+                    <tr key={believer.uniqueId} className="hover:bg-white/[0.02]">
                       <td className="p-3.5 font-bold text-white">
                         {believer.name} {believer.isHead && <span className="text-[10px] text-orange-400 font-normal">(Head)</span>}
-                        <div className="text-[10px] text-slate-400 font-mono font-normal">{believer.memberId}</div>
+                        <div className="text-[10px] text-slate-400 font-mono font-normal">{believer.memberId || believer.uniqueId}</div>
                       </td>
                       <td className="p-3.5 text-slate-300">
                         {believer.familyName}
                         {believer.isHead && (
                           <button
                             type="button"
-                            onClick={() => handleQuickFamilyMark(believer.rawFamily)}
+                            onClick={() => handleQuickFamilyMark(believer.rawFamily, believer.famIndex)}
                             className="block text-[10px] text-orange-400 font-bold mt-0.5 hover:underline cursor-pointer"
                           >
-                            Mark Family →
+                            Mark Whole Family &rarr;
                           </button>
                         )}
                       </td>
@@ -327,7 +346,7 @@ const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().
                       <td className="p-3.5 text-center">
                         <button
                           type="button"
-                          onClick={() => handleToggleAttendance(believer.memberId, believer.name, 'Member')}
+                          onClick={() => handleToggleAttendance(believer.uniqueId, believer.name, 'Member')}
                           className={`px-3 py-1 rounded-xl text-xs font-bold cursor-pointer transition-all ${
                             isPresent ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-300 border border-white/10'
                           }`}
