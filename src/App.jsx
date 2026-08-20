@@ -8,7 +8,7 @@ import AttendanceDashboard from './pages/AttendanceDashboard';
 import VisitorsDashboard from './pages/VisitorsDashboard';
 import EventsDashboard from './pages/EventsDashboard'; // 1. சரியான Import
 import LiveStreamDashboard from './pages/LiveStreamDashboard';
-
+import PrayerDashboard from './pages/PrayerDashboard';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -44,7 +44,10 @@ export default function App() {
             <EventsDashboard onNavigateTab={setActiveTab} />
           )}
           {activeTab === 'livestream' && <LiveStreamDashboard />}
-          
+          {(activeTab === 'prayer' || activeTab === 'prayer_altar') && (
+          <PrayerDashboard onNavigateTab={setActiveTab} />
+        )}
+
         </main>
       </div>
     </div>

@@ -43,9 +43,11 @@ export default function Sidebar({ activeTab, setActiveTab }) {
     { id: 'attendance', label: 'Attendance', icon: CalendarCheck },
     { id: 'members', label: 'Members', icon: Users },
     { id: 'visitors', label: 'Visitors', icon: HeartHandshake },
+    { id: 'prayer', label: 'Prayer', icon: HeartHandshake },
     { id: 'events', label: 'Events', icon: CalendarDays },
     { id: 'livestream', label: 'Live Stream', icon: Tv, isLiveBadge: true },
     { id: 'settings', label: 'Settings', icon: Settings },
+    
   ];
 
   return (
