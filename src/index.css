@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* 1. Dynamic Animated Aurora Glow Keyframes */
+@keyframes auroraGlow {
+  0% {
+    background-position: 0% 50%, 100% 50%, 50% 0%, 50% 100%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%, 50% 100%, 50% 0%;
+    filter: hue-rotate(25deg);
+  }
+  100% {
+    background-position: 0% 50%, 100% 50%, 50% 0%, 50% 100%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* 2. Global Animated Mesh Canvas */
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #f8fafc;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0b0f19;
+  background-image: 
+    radial-gradient(at 10% 15%, rgba(167, 139, 250, 0.45) 0px, transparent 55%),
+    radial-gradient(at 90% 10%, rgba(251, 146, 60, 0.40) 0px, transparent 50%),
+    radial-gradient(at 85% 85%, rgba(244, 114, 182, 0.40) 0px, transparent 55%),
+    radial-gradient(at 15% 90%, rgba(56, 189, 248, 0.35) 0px, transparent 50%);
+  background-size: 180% 180%;
+  background-attachment: fixed;
+  animation: auroraGlow 18s ease-in-out infinite alternate;
+  overflow-x: hidden;
+}
+
+/* 3. Ultra Glass Frosted Panels */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.62);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.52);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(251, 146, 60, 0.45);
+  box-shadow: 0 12px 35px rgba(251, 146, 60, 0.15);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
