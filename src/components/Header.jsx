@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Church, ShieldCheck, Sparkles } from 'lucide-react';
 
-export default function Header({ 
-  activeTab = "settings",
-  currentChurchName = "Nope Search Main Cathedral", 
-  pastorName = "Rev. Senior Pastor" 
-}) {
-  const [currentDateTime, setCurrentDateTime] = useState('');
+export default function Header({ activeTab, currentChurchName, pastorName })
+ {
+const pagetitle = activeTab === 'dashboard' ? 'Main Dashboard' : activeTab.replace('_', ' ').toUpperCase();
+
+const [currentDateTime, setCurrentDateTime] = useState('');
 
   useEffect(() => {
     const updateTime = () => {
@@ -40,7 +39,7 @@ export default function Header({
         </div>
         <div>
           <h2 className="text-base font-extrabold capitalize text-white tracking-wide">
-            {activeTab.replace('_', ' ')} Dashboard
+            {pagetitle}
           </h2>
           <div className="flex items-center gap-1.5 text-[10px] text-orange-300 font-medium">
             <Church size={11} className="text-orange-400" />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  LayoutDashboard, Users, CreditCard, FileText, 
-  Heart, CalendarDays, Radio, Settings 
+  LayoutDashboard, CalendarCheck, Users, HeartHandshake, 
+  CalendarDays, Tv, Settings, Sparkles, Radio
 } from 'lucide-react';
 
 export default function Sidebar({ activeTab, setActiveTab }) {
@@ -40,14 +40,11 @@ export default function Sidebar({ activeTab, setActiveTab }) {
   // Events & Live Dashboard இணைக்கப்பட்ட நேவிகேஷன் மெனுக்கள்
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'attendance', label: 'Attendance', icon: Users },
+    { id: 'attendance', label: 'Attendance', icon: CalendarCheck },
     { id: 'members', label: 'Members', icon: Users },
-    { id: 'visitors', label: 'Visitors', icon: Users },
+    { id: 'visitors', label: 'Visitors', icon: HeartHandshake },
     { id: 'events', label: 'Events', icon: CalendarDays },
-    { id: 'live', label: 'Live Stream', icon: Radio, isLiveBadge: true },
-    { id: 'prayer', label: 'Prayer', icon: Heart },
-    { id: 'finance', label: 'Finance', icon: CreditCard },
-    { id: 'reports', label: 'Reports', icon: FileText },
+    { id: 'livestream', label: 'Live Stream', icon: Tv, isLiveBadge: true },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
@@ -76,7 +73,10 @@ export default function Sidebar({ activeTab, setActiveTab }) {
         <nav className="space-y-2 pt-4">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeTab === item.id;
+            const isActive = activeTab === item.id || 
+              (item.id === 'attendance' && (activeTab === 'attendance_registry' || activeTab === 'attendance_marker')) ||
+              (item.id === 'members' && activeTab === 'members_list');
+
             return (
               <button
                 key={item.id}
@@ -89,7 +89,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon size={16} className={isActive ? 'text-white' : 'text-orange-400/80'} />
+                  {Icon && <Icon size={16} className={isActive ? 'text-white' : 'text-orange-400/80'} />}
                   <span>{item.label}</span>
                 </div>
 
