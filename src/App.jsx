@@ -25,7 +25,7 @@ const defaultChurchProfile = {
 };
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('settings'); // அல்லது 'dashboard'
+  const [activeTab, setActiveTab] = useState('dashboard'); // அல்லது 'dashboard'
 
   // Dynamic Profile State (from localStorage)
   const [churchProfile, setChurchProfile] = useState(() => {
