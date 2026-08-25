@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { 
+<<<<<<< HEAD
   UserPlus, Check, X, Save, Plus, Edit2, Trash2, Sliders, 
   Users, Heart, Sparkles, Award, GitBranch, Calendar, ShieldCheck
 } from 'lucide-react';
 
 export default function MemberRegistrationTab({ onTriggerSuccess }) {
   // 1. Core Registration Automation Configuration
+=======
+  UserPlus, Check, X, Save, Plus, Edit2, Trash2, Sliders, ShieldCheck 
+} from 'lucide-react';
+
+export default function MemberRegistrationTab({ onTriggerSuccess }) {
+>>>>>>> 51282b6 (Initial commit)
   const [formConfig, setFormConfig] = useState(() => {
     const saved = localStorage.getItem('app_member_registration_config');
     if (saved) {
@@ -17,6 +24,7 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
       memberIdPrefix: 'CAT',
       allowOnlineSelfRegistration: true,
       notifyPastorOnNewRegistration: true,
+<<<<<<< HEAD
       enableFamilyGrouping: true,
       captureMinistryTalents: true
     };
@@ -25,10 +33,20 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
   // 2. Pure Clean English Family Relationships List
   const [familyRoles, setFamilyRoles] = useState(() => {
     const saved = localStorage.getItem('app_reg_custom_family_roles_en');
+=======
+      requireBaptismDate: false,
+      requireFamilyHeadAssignment: true
+    };
+  });
+
+  const [customFields, setCustomFields] = useState(() => {
+    const saved = localStorage.getItem('app_registration_custom_fields');
+>>>>>>> 51282b6 (Initial commit)
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
     return [
+<<<<<<< HEAD
       { id: 1, roleName: 'Head of Family', isPrimaryHead: true },
       { id: 2, roleName: 'Spouse / Wife', isPrimaryHead: false },
       { id: 3, roleName: 'Son', isPrimaryHead: false },
@@ -217,26 +235,83 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
 
         {/* 1. MASTER WORKFLOW & FAMILY TREE CONFIGURATION */}
         <div className="glass-card rounded-3xl p-8 space-y-6">
+=======
+      { id: 1, label: 'Blood Group', type: 'Dropdown', required: false, options: 'A+, B+, O+, AB+, A-, B-, O-, AB-' },
+      { id: 2, label: 'Spiritual Gifts / Ministry Interest', type: 'Text', required: false, options: '' },
+      { id: 3, label: 'Emergency Contact Person', type: 'Text', required: true, options: '' }
+    ];
+  });
+
+  const [isFieldModalOpen, setIsFieldModalOpen] = useState(false);
+  const [fieldForm, setFieldForm] = useState({ label: '', type: 'Text', required: false, options: '' });
+
+  const handleSaveAll = (e) => {
+    if (e) e.preventDefault();
+    localStorage.setItem('app_member_registration_config', JSON.stringify(formConfig));
+    localStorage.setItem('app_registration_custom_fields', JSON.stringify(customFields));
+    onTriggerSuccess?.('Member Registration Rules & Custom Fields saved successfully!');
+  };
+
+  const handleAddField = (e) => {
+    e.preventDefault();
+    if (!fieldForm.label.trim()) return;
+
+    const newField = { id: Date.now(), ...fieldForm };
+    const updated = [...customFields, newField];
+    setCustomFields(updated);
+    localStorage.setItem('app_registration_custom_fields', JSON.stringify(updated));
+    setFieldForm({ label: '', type: 'Text', required: false, options: '' });
+    setIsFieldModalOpen(false);
+    onTriggerSuccess?.('Custom registration field added!');
+  };
+
+  const handleDeleteField = (id) => {
+    if (window.confirm("Remove this field from the registration form?")) {
+      const updated = customFields.filter(f => f.id !== id);
+      setCustomFields(updated);
+      localStorage.setItem('app_registration_custom_fields', JSON.stringify(updated));
+      onTriggerSuccess?.('Field removed.');
+    }
+  };
+
+  return (
+    <div className="space-y-6 animate-fadeIn pb-8">
+      <form onSubmit={handleSaveAll} className="space-y-6">
+        <div className="glass-card rounded-3xl p-8 space-y-6">
+          
+>>>>>>> 51282b6 (Initial commit)
           <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <UserPlus className="text-orange-400" size={22} />
+<<<<<<< HEAD
                 Member & Family Registration Setup
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
                 Configure custom family relationships, field intake policies, and ministry placement directories
+=======
+                Member Registration Setup & Custom Fields
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Customize required intake questions, ID generation rules, and digital form settings
+>>>>>>> 51282b6 (Initial commit)
               </p>
             </div>
 
             <button
               type="submit"
+<<<<<<< HEAD
               className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_20px_rgba(255,107,0,0.45)] border border-white/20 cursor-pointer transition-all active:scale-95 shrink-0"
+=======
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
+>>>>>>> 51282b6 (Initial commit)
             >
               <Save size={15} />
               <span>Save Registration Setup</span>
             </button>
           </div>
 
+<<<<<<< HEAD
           {/* Core Automation Workflows */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
@@ -249,6 +324,19 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                 <div>
                   <span className="text-xs font-bold text-white block">Auto-Generate Believer Member ID Code</span>
                   <span className="text-[11px] text-slate-400">Generates unique permanent church IDs (e.g. CAT-00142)</span>
+=======
+          {/* Core Validation Toggles */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider">
+              1. Registration Workflow & Automation
+            </h4>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <label className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between gap-3 cursor-pointer">
+                <div>
+                  <span className="text-xs font-bold text-white block">Auto-Generate Believer Member ID</span>
+                  <span className="text-[11px] text-slate-400">Assigns unique church ID code automatically</span>
+>>>>>>> 51282b6 (Initial commit)
                 </div>
                 <input
                   type="checkbox"
@@ -258,6 +346,7 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                 />
               </label>
 
+<<<<<<< HEAD
               <label className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between gap-3 cursor-pointer hover:border-orange-500/30 transition-all">
                 <div>
                   <span className="text-xs font-bold text-white block">Enable 1-Click Family Bundle Registration</span>
@@ -267,11 +356,49 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                   type="checkbox"
                   checked={formConfig.enableFamilyGrouping}
                   onChange={(e) => setFormConfig({ ...formConfig, enableFamilyGrouping: e.target.checked })}
+=======
+              <label className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between gap-3 cursor-pointer">
+                <div>
+                  <span className="text-xs font-bold text-white block">Require Family Head Linkage</span>
+                  <span className="text-[11px] text-slate-400">Must link to an existing or new household</span>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={formConfig.requireFamilyHeadAssignment}
+                  onChange={(e) => setFormConfig({ ...formConfig, requireFamilyHeadAssignment: e.target.checked })}
+                  className="w-4 h-4 accent-orange-500 rounded cursor-pointer"
+                />
+              </label>
+
+              <label className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between gap-3 cursor-pointer">
+                <div>
+                  <span className="text-xs font-bold text-white block">Allow Online Self-Registration</span>
+                  <span className="text-[11px] text-slate-400">Enables public web registration link for newcomers</span>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={formConfig.allowOnlineSelfRegistration}
+                  onChange={(e) => setFormConfig({ ...formConfig, allowOnlineSelfRegistration: e.target.checked })}
+                  className="w-4 h-4 accent-orange-500 rounded cursor-pointer"
+                />
+              </label>
+
+              <label className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between gap-3 cursor-pointer">
+                <div>
+                  <span className="text-xs font-bold text-white block">Notify Pastor on New Registration</span>
+                  <span className="text-[11px] text-slate-400">Sends instant SMS/WhatsApp alert to area pastor</span>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={formConfig.notifyPastorOnNewRegistration}
+                  onChange={(e) => setFormConfig({ ...formConfig, notifyPastorOnNewRegistration: e.target.checked })}
+>>>>>>> 51282b6 (Initial commit)
                   className="w-4 h-4 accent-orange-500 rounded cursor-pointer"
                 />
               </label>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
 
         {/* 2. DYNAMIC FAMILY RELATIONSHIPS */}
@@ -481,10 +608,42 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                     type="button"
                     onClick={() => handleDeleteTalent(talent.id)}
                     className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 cursor-pointer transition-all active:scale-95"
+=======
+
+          {/* Custom Fields Section */}
+          <div className="space-y-3 pt-4 border-t border-white/10">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider">
+                2. Custom Form Questions & Additional Fields
+              </h4>
+
+              <button
+                type="button"
+                onClick={() => setIsFieldModalOpen(true)}
+                className="flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold border border-white/10 cursor-pointer"
+              >
+                <Plus size={13} />
+                <span>+ Add Field</span>
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              {customFields.map((field) => (
+                <div key={field.id} className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
+                  <div>
+                    <h5 className="text-xs font-bold text-white">{field.label}</h5>
+                    <p className="text-[10px] text-slate-400">Type: {field.type} • {field.required ? 'Mandatory' : 'Optional'}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteField(field.id)}
+                    className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
                   >
                     <Trash2 size={13} />
                   </button>
                 </div>
+<<<<<<< HEAD
               </div>
             ))}
           </div>
@@ -513,10 +672,38 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                 {editingRoleId ? 'Edit Relationship Term' : 'Add Relationship Term'}
               </h3>
               <button onClick={() => setIsRoleModalOpen(false)} className="text-slate-400 hover:text-white cursor-pointer">
+=======
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Save */}
+          <div className="flex justify-end pt-3 border-t border-white/10">
+            <button
+              type="submit"
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white text-xs font-bold rounded-2xl shadow-lg shadow-orange-500/25 cursor-pointer"
+            >
+              <Save size={15} />
+              <span>Save Changes</span>
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+      {/* Add Field Modal */}
+      {isFieldModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
+          <div className="glass-panel w-full max-w-md p-6 rounded-3xl border border-white/25 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="text-base font-bold text-white">Add Custom Registration Field</h3>
+              <button onClick={() => setIsFieldModalOpen(false)} className="text-slate-400 hover:text-white cursor-pointer">
+>>>>>>> 51282b6 (Initial commit)
                 <X size={18} />
               </button>
             </div>
 
+<<<<<<< HEAD
             <form onSubmit={handleSaveRole} className="space-y-3.5">
               <div>
                 <label className="text-xs text-slate-300 font-medium">Relationship Term (English) *</label>
@@ -584,12 +771,25 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                   value={newFieldForm.label}
                   onChange={(e) => setNewFieldForm({ ...newFieldForm, label: e.target.value })}
                   className="w-full bg-slate-900/80 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white mt-1 focus:outline-none focus:border-orange-500"
+=======
+            <form onSubmit={handleAddField} className="space-y-3">
+              <div>
+                <label className="text-xs text-slate-300 font-medium">Field Question / Label *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Previous Church Affiliation"
+                  value={fieldForm.label}
+                  onChange={(e) => setFieldForm({ ...fieldForm, label: e.target.value })}
+                  className="w-full bg-slate-900/80 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white mt-1 focus:outline-none"
+>>>>>>> 51282b6 (Initial commit)
                 />
               </div>
 
               <div>
                 <label className="text-xs text-slate-300 font-medium">Input Format Type</label>
                 <select
+<<<<<<< HEAD
                   value={newFieldForm.fieldType}
                   onChange={(e) => setNewFieldForm({ ...newFieldForm, fieldType: e.target.value })}
                   className="w-full bg-slate-900/80 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white mt-1 focus:outline-none cursor-pointer"
@@ -598,30 +798,56 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
                   <option value="Dropdown">Dropdown Selection</option>
                   <option value="Date Picker">Date Picker</option>
                   <option value="Yes / No Checkbox">Yes / No Checkbox</option>
+=======
+                  value={fieldForm.type}
+                  onChange={(e) => setFieldForm({ ...fieldForm, type: e.target.value })}
+                  className="w-full bg-slate-900/80 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white mt-1 focus:outline-none cursor-pointer"
+                >
+                  <option value="Text">Short Text Box</option>
+                  <option value="Dropdown">Dropdown Selection</option>
+                  <option value="Date">Date Picker</option>
+                  <option value="Checkbox">Yes/No Checkbox</option>
+>>>>>>> 51282b6 (Initial commit)
                 </select>
               </div>
 
               <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer pt-1">
                 <input
                   type="checkbox"
+<<<<<<< HEAD
                   checked={newFieldForm.isMandatory}
                   onChange={(e) => setNewFieldForm({ ...newFieldForm, isMandatory: e.target.checked })}
                   className="w-4 h-4 accent-rose-500 rounded cursor-pointer"
                 />
                 <span>Make this field mandatory in registration form</span>
+=======
+                  checked={fieldForm.required}
+                  onChange={(e) => setFieldForm({ ...fieldForm, required: e.target.checked })}
+                  className="w-4 h-4 accent-orange-500 rounded cursor-pointer"
+                />
+                <span>Make this question mandatory</span>
+>>>>>>> 51282b6 (Initial commit)
               </label>
 
               <div className="flex justify-end gap-2 pt-3 border-t border-white/10">
                 <button
                   type="button"
+<<<<<<< HEAD
                   onClick={() => setIsNewFieldModalOpen(false)}
+=======
+                  onClick={() => setIsFieldModalOpen(false)}
+>>>>>>> 51282b6 (Initial commit)
                   className="px-4 py-2 text-xs text-slate-400 hover:text-white cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
+<<<<<<< HEAD
                   className="px-5 py-2 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 cursor-pointer"
+=======
+                  className="px-5 py-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white rounded-xl text-xs font-bold cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
                 >
                   Add Field
                 </button>
@@ -630,6 +856,7 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
           </div>
         </div>
       )}
+<<<<<<< HEAD
 
       {/* MODAL 3: ADD MINISTRY TALENT */}
       {isTalentModalOpen && (
@@ -695,6 +922,8 @@ export default function MemberRegistrationTab({ onTriggerSuccess }) {
         </div>
       )}
 
+=======
+>>>>>>> 51282b6 (Initial commit)
     </div>
   );
 }

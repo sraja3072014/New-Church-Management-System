@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
+<<<<<<< HEAD
   LayoutDashboard, Users, CalendarCheck, 
   CalendarDays, Tv, Flame, FileText, 
   Settings, ChevronRight, Sparkles, UserCheck
@@ -11,17 +12,33 @@ export default function Sidebar({ activeTab = 'dashboard', setActiveTab, churchP
   // 1. Synchronized State with Fallbacks
   const [churchTitle, setChurchTitle] = useState(() => {
     if (safeProfile.churchName) return safeProfile.churchName;
+=======
+  LayoutDashboard, Users, CreditCard, FileText, 
+  Heart, Settings 
+} from 'lucide-react';
+
+export default function Sidebar({ activeTab, setActiveTab }) {
+  const [churchTitle, setChurchTitle] = useState(() => {
+>>>>>>> 51282b6 (Initial commit)
     const activeTitle = localStorage.getItem('app_active_church_title');
     if (activeTitle) return activeTitle;
     try {
       const saved = localStorage.getItem('app_main_church_info');
       if (saved) return JSON.parse(saved).name;
     } catch (e) {}
+<<<<<<< HEAD
     return 'CATHEDRAL HQ';
   });
 
   const [churchLogo, setChurchLogo] = useState(() => {
     return localStorage.getItem('app_logo') || localStorage.getItem('app_main_church_logo') || null;
+=======
+    return 'NOPE SEARCH';
+  });
+
+  const [churchLogo, setChurchLogo] = useState(() => {
+    return localStorage.getItem('app_main_church_logo') || null;
+>>>>>>> 51282b6 (Initial commit)
   });
 
   useEffect(() => {
@@ -34,12 +51,18 @@ export default function Sidebar({ activeTab = 'dashboard', setActiveTab, churchP
           if (saved) title = JSON.parse(saved).name;
         } catch (e) {}
       }
+<<<<<<< HEAD
       setChurchTitle(title || safeProfile.churchName || 'CATHEDRAL HQ');
       setChurchLogo(localStorage.getItem('app_logo') || localStorage.getItem('app_main_church_logo') || null);
+=======
+      setChurchTitle(title || 'NOPE SEARCH');
+      setChurchLogo(localStorage.getItem('app_main_church_logo') || null);
+>>>>>>> 51282b6 (Initial commit)
     };
 
     window.addEventListener('churchDataUpdated', handleSync);
     return () => window.removeEventListener('churchDataUpdated', handleSync);
+<<<<<<< HEAD
   }, [safeProfile.churchName]);
 
   const systemBrand = safeProfile.systemBrand || 'CHURCH OS';
@@ -56,10 +79,21 @@ export default function Sidebar({ activeTab = 'dashboard', setActiveTab, churchP
     { id: 'events', label: 'Events', icon: CalendarDays },
     { id: 'livestream', label: 'Live Stream', icon: Tv },
     { id: 'reports', label: 'Reports', icon: FileText },
+=======
+  }, []);
+
+  const navItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'members', label: 'Members', icon: Users },
+    { id: 'finance', label: 'Finance', icon: CreditCard },
+    { id: 'reports', label: 'Reports', icon: FileText },
+    { id: 'prayer', label: 'Prayer', icon: Heart },
+>>>>>>> 51282b6 (Initial commit)
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   return (
+<<<<<<< HEAD
     <aside className="w-64 h-screen shrink-0 border-r border-white/10 bg-[#0e1322]/85 backdrop-blur-2xl flex flex-col justify-between p-4 z-40 select-none text-slate-200">
       
       <div className="space-y-5">
@@ -111,11 +145,39 @@ export default function Sidebar({ activeTab = 'dashboard', setActiveTab, churchP
               (item.id === 'attendance' && (activeTab === 'attendance_registry' || activeTab === 'attendance_marker')) ||
               (item.id === 'reports' && activeTab === 'reports_dashboard');
 
+=======
+    <aside className="w-56 min-h-screen bg-[#0e1322]/90 backdrop-blur-xl border-r border-white/10 p-4 flex flex-col justify-between shrink-0 select-none z-20 shadow-[inset_0_0_30px_rgba(255,107,0,0.06),0_0_35px_rgba(255,107,0,0.12)]">
+      <div className="space-y-8 pt-2">
+        
+        {/* Dynamic Church Brand Header with Frosted Glass Glow */}
+        <div className="flex items-center gap-3 px-2 py-2 rounded-2xl bg-gradient-to-r from-orange-500/10 via-rose-500/10 to-transparent border border-white/10 shadow-[0_0_20px_rgba(255,107,0,0.15)] backdrop-blur-md">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#ff6b00] to-[#f43f5e] flex items-center justify-center overflow-hidden shrink-0 shadow-[0_0_15px_rgba(255,107,0,0.5)] text-white font-bold text-sm">
+            {churchLogo ? (
+              <img src={churchLogo} alt="Logo" className="w-full h-full object-cover" />
+            ) : (
+              churchTitle.charAt(0).toUpperCase()
+            )}
+          </div>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider truncate" title={churchTitle}>
+              {churchTitle}
+            </h2>
+            <p className="text-[10px] text-orange-400/80 truncate font-medium">Church MS</p>
+          </div>
+        </div>
+
+        {/* Navigation Items with Ambient Glass Glow */}
+        <nav className="space-y-2.5 pt-6">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+>>>>>>> 51282b6 (Initial commit)
             return (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setActiveTab && setActiveTab(item.id)}
+<<<<<<< HEAD
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
                   isActive
                     ? 'bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] text-white shadow-[0_0_15px_rgba(255,107,0,0.35)] border border-white/20 scale-[1.02]'
@@ -127,10 +189,21 @@ export default function Sidebar({ activeTab = 'dashboard', setActiveTab, churchP
                   <span>{item.label}</span>
                 </div>
                 {isActive && <ChevronRight size={14} className="text-white" />}
+=======
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 cursor-pointer ${
+                  isActive
+                    ? 'bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] text-white font-bold shadow-[0_0_25px_rgba(255,107,0,0.5)] scale-[1.02] border border-white/20'
+                    : 'text-slate-300 bg-white/[0.02] border border-white/5 hover:text-white hover:bg-gradient-to-r hover:from-orange-500/15 hover:to-rose-500/10 hover:border-orange-500/30 hover:shadow-[0_0_15px_rgba(255,107,0,0.2)]'
+                }`}
+              >
+                <Icon size={16} className={isActive ? 'text-white' : 'text-orange-400/70'} />
+                <span>{item.label}</span>
+>>>>>>> 51282b6 (Initial commit)
               </button>
             );
           })}
         </nav>
+<<<<<<< HEAD
       </div>
 
       {/* Footer System Status */}
@@ -142,6 +215,10 @@ export default function Sidebar({ activeTab = 'dashboard', setActiveTab, churchP
         <span className="text-emerald-400 font-mono font-bold">Encrypted & Online</span>
       </div>
 
+=======
+
+      </div>
+>>>>>>> 51282b6 (Initial commit)
     </aside>
   );
 }

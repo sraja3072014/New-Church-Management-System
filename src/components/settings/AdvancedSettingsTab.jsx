@@ -9,7 +9,11 @@ import {
 export default function AdvancedSettingsTab({ onTriggerSuccess }) {
   // Comprehensive Global Countries Metadata
   const globalCountries = [
+<<<<<<< HEAD
     { country: 'India', flag: '🇮🇳', code: 'IN', timeZone: 'Asia/Kolkata (IST +5:30)', currency: 'INR (₹)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'en', label: 'English (India)' }, { code: 'hi', label: 'हिन्दी (Hindi)' }, { code: 'te', label: 'తెలుగు (Telugu)' }, { code: 'ml', label: 'മലയാളம் (Malayalam)' }, { code: 'kn', label: 'ಕನ್ನಡ (Kannada)' }] },
+=======
+    { country: 'India', flag: '🇮🇳', code: 'IN', timeZone: 'Asia/Kolkata (IST +5:30)', currency: 'INR (₹)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'en', label: 'English (India)' }, { code: 'hi', label: 'हिन्दी (Hindi)' }, { code: 'te', label: 'తెలుగు (Telugu)' }, { code: 'ml', label: 'മലയാളം (Malayalam)' }, { code: 'kn', label: 'ಕನ್ನಡ (Kannada)' }] },
+>>>>>>> 51282b6 (Initial commit)
     { country: 'United States', flag: '🇺🇸', code: 'US', timeZone: 'America/New_York (EST -5:00)', currency: 'USD ($)', dateFormat: 'MM/DD/YYYY', languages: [{ code: 'en-US', label: 'English (US)' }, { code: 'es', label: 'Español (Spanish)' }] },
     { country: 'United Kingdom', flag: '🇬🇧', code: 'GB', timeZone: 'Europe/London (GMT/BST)', currency: 'GBP (£)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'en-GB', label: 'English (UK)' }, { code: 'cy', label: 'Welsh' }] },
     { country: 'Canada', flag: '🇨🇦', code: 'CA', timeZone: 'America/Toronto (EST -5:00)', currency: 'CAD ($)', dateFormat: 'YYYY-MM-DD', languages: [{ code: 'en-CA', label: 'English (Canada)' }, { code: 'fr-CA', label: 'Français (French)' }] },
@@ -17,7 +21,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     { country: 'Singapore', flag: '🇸🇬', code: 'SG', timeZone: 'Asia/Singapore (SGT +8:00)', currency: 'SGD (S$)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'en', label: 'English (Singapore)' }, { code: 'zh', label: '简体中文 (Mandarin)' }, { code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'ms', label: 'Bahasa Melayu' }] },
     { country: 'Malaysia', flag: '🇲🇾', code: 'MY', timeZone: 'Asia/Kuala_Lumpur (MYT +8:00)', currency: 'MYR (RM)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'ms', label: 'Bahasa Melayu' }, { code: 'en', label: 'English' }, { code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'zh', label: '简体中文' }] },
     { country: 'Sri Lanka', flag: '🇱🇰', code: 'LK', timeZone: 'Asia/Colombo (SLST +5:30)', currency: 'LKR (Rs)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'si', label: 'සිංහල (Sinhala)' }, { code: 'en', label: 'English' }] },
+<<<<<<< HEAD
     { country: 'United Arab Emirates', flag: '🇦🇪', code: 'AE', timeZone: 'Asia/Dubai (GST +4:00)', currency: 'AED (د.إ)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'ar', label: 'العربية (Arabic)' }, { code: 'en', label: 'English' }, { code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'ml', label: 'മലയാളம் (Malayalam)' }] },
+=======
+    { country: 'United Arab Emirates', flag: '🇦🇪', code: 'AE', timeZone: 'Asia/Dubai (GST +4:00)', currency: 'AED (د.إ)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'ar', label: 'العربية (Arabic)' }, { code: 'en', label: 'English' }, { code: 'ta', label: 'தமிழ் (Tamil)' }, { code: 'ml', label: 'മലയാളം (Malayalam)' }] },
+>>>>>>> 51282b6 (Initial commit)
     { country: 'Germany', flag: '🇩🇪', code: 'DE', timeZone: 'Europe/Berlin (CET +1:00)', currency: 'EUR (€)', dateFormat: 'DD.MM.YYYY', languages: [{ code: 'de', label: 'Deutsch (German)' }, { code: 'en', label: 'English' }] },
     { country: 'France', flag: '🇫🇷', code: 'FR', timeZone: 'Europe/Paris (CET +1:00)', currency: 'EUR (€)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'fr', label: 'Français (French)' }, { code: 'en', label: 'English' }] },
     { country: 'Russia', flag: '🇷🇺', code: 'RU', timeZone: 'Europe/Moscow (MSK +3:00)', currency: 'RUB (₽)', dateFormat: 'DD.MM.YYYY', languages: [{ code: 'ru', label: 'Русский (Russian)' }, { code: 'en', label: 'English' }] },
@@ -27,7 +35,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     { country: 'Brazil', flag: '🇧🇷', code: 'BR', timeZone: 'America/Sao_Paulo (BRT -3:00)', currency: 'BRL (R$)', dateFormat: 'DD/MM/YYYY', languages: [{ code: 'pt-BR', label: 'Português (Portuguese)' }] }
   ];
 
+<<<<<<< HEAD
   // Cloud Storage Connections List with safe fallback[cite: 14]
+=======
+  // Cloud Storage Connections List with safe fallback
+>>>>>>> 51282b6 (Initial commit)
   const [cloudProviders, setCloudProviders] = useState(() => {
     try {
       const saved = localStorage.getItem('app_cloud_providers');
@@ -69,7 +81,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     ];
   });
 
+<<<<<<< HEAD
   // Global Config with Safe Schema Normalization[cite: 14]
+=======
+  // Global Config with Safe Schema Normalization
+>>>>>>> 51282b6 (Initial commit)
   const [advancedConfig, setAdvancedConfig] = useState(() => {
     const defaults = {
       country: 'India',
@@ -93,7 +109,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     return defaults;
   });
 
+<<<<<<< HEAD
   // Modal State for Cloud Provider[cite: 14]
+=======
+  // Modal State for Cloud Provider
+>>>>>>> 51282b6 (Initial commit)
   const [isCloudModalOpen, setIsCloudModalOpen] = useState(false);
   const [editingCloudId, setEditingCloudId] = useState(null);
   const [cloudForm, setCloudForm] = useState({
@@ -106,7 +126,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     autoSyncInterval: 'Daily at 02:00 AM'
   });
 
+<<<<<<< HEAD
   // Country Selection Change Handler[cite: 14]
+=======
+  // Country Selection Change Handler
+>>>>>>> 51282b6 (Initial commit)
   const handleCountrySelect = (cName) => {
     const meta = globalCountries.find(c => c.country === cName) || globalCountries[0];
     if (meta) {
@@ -122,7 +146,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     }
   };
 
+<<<<<<< HEAD
   // Cloud Provider Handlers[cite: 14]
+=======
+  // Cloud Provider Handlers
+>>>>>>> 51282b6 (Initial commit)
   const handleOpenCloudModal = (item = null) => {
     if (item) {
       setEditingCloudId(item.id);
@@ -197,14 +225,25 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
     }
   };
 
+<<<<<<< HEAD
+=======
+  // Safe lookup for country metadata
+>>>>>>> 51282b6 (Initial commit)
   const currentCountryObj = globalCountries.find(c => c.country === advancedConfig.country) || globalCountries[0];
   const availableLanguages = currentCountryObj?.languages || [{ code: 'en', label: 'English' }];
 
   return (
+<<<<<<< HEAD
     <div className="space-y-6 animate-fadeIn pb-10">
       <form onSubmit={handleSaveAll} className="space-y-6">
 
         {/* Master Header Bar[cite: 14] */}
+=======
+    <div className="space-y-6 animate-fadeIn pb-8">
+      <form onSubmit={handleSaveAll} className="space-y-6">
+
+        {/* Master Header Bar */}
+>>>>>>> 51282b6 (Initial commit)
         <div className="glass-card rounded-3xl p-8 space-y-6">
           <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -213,6 +252,7 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                 Global Architecture, Cloud Vaults & Multi-Country Engine
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
+<<<<<<< HEAD
                 Worldwide country hierarchy with auto-cascading currency & timezone, plus Multi-Cloud storage vaults[cite: 14]
               </p>
             </div>
@@ -221,13 +261,26 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
             <button
               type="submit"
               className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_20px_rgba(255,107,0,0.45)] border border-white/20 cursor-pointer transition-all active:scale-95 shrink-0"
+=======
+                Worldwide country hierarchy with auto-cascading currency & timezone, plus Multi-Cloud storage vaults
+              </p>
+            </div>
+
+            <button
+              type="submit"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
+>>>>>>> 51282b6 (Initial commit)
             >
               <Save size={15} />
               <span>Save System Settings</span>
             </button>
           </div>
 
+<<<<<<< HEAD
           {/* 1. Global Country Selection[cite: 14] */}
+=======
+          {/* 1. Global Country Dropdown with Cascading Metadata */}
+>>>>>>> 51282b6 (Initial commit)
           <div className="space-y-4">
             <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
               <Globe size={15} />
@@ -235,6 +288,10 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<<<<<<< HEAD
+=======
+              {/* Country Search Dropdown */}
+>>>>>>> 51282b6 (Initial commit)
               <div>
                 <label className="text-xs font-medium text-slate-300">Target Country / Territory *</label>
                 <select
@@ -250,6 +307,10 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                 </select>
               </div>
 
+<<<<<<< HEAD
+=======
+              {/* Regional Language Select */}
+>>>>>>> 51282b6 (Initial commit)
               <div>
                 <label className="text-xs font-medium text-slate-300">Regional Language Selection *</label>
                 <select
@@ -263,6 +324,10 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                 </select>
               </div>
 
+<<<<<<< HEAD
+=======
+              {/* Auto Synchronized Timezone */}
+>>>>>>> 51282b6 (Initial commit)
               <div>
                 <label className="text-xs font-medium text-slate-300">Synchronized Timezone</label>
                 <input
@@ -273,6 +338,10 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                 />
               </div>
 
+<<<<<<< HEAD
+=======
+              {/* Auto Currency */}
+>>>>>>> 51282b6 (Initial commit)
               <div>
                 <label className="text-xs font-medium text-slate-300">Currency Standard</label>
                 <input
@@ -285,7 +354,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* 2. Multi-Cloud Storage Providers[cite: 14] */}
+=======
+          {/* 2. Multi-Cloud Storage Providers & Dynamic Setup (+ Add Custom Storage) */}
+>>>>>>> 51282b6 (Initial commit)
           <div className="space-y-4 pt-4 border-t border-white/10">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
@@ -294,6 +367,7 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                   <span>2. Multi-Cloud Storage Vaults (Google Drive, Firebase, AWS, Azure)</span>
                 </h4>
                 <p className="text-[11px] text-slate-400 mt-0.5">
+<<<<<<< HEAD
                   Configure dynamic cloud storage endpoints for automated disaster recovery snapshots[cite: 14]
                 </p>
               </div>
@@ -303,20 +377,38 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                 type="button"
                 onClick={() => handleOpenCloudModal()}
                 className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 cursor-pointer transition-all active:scale-95 shrink-0"
+=======
+                  Configure dynamic cloud storage endpoints for automated disaster recovery snapshots
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleOpenCloudModal()}
+                className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
+>>>>>>> 51282b6 (Initial commit)
               >
                 <Plus size={14} />
                 <span>+ Add Cloud Storage Provider</span>
               </button>
             </div>
 
+<<<<<<< HEAD
             {/* Cloud Providers Grid[cite: 14] */}
+=======
+            {/* Cloud Providers Grid */}
+>>>>>>> 51282b6 (Initial commit)
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {cloudProviders.map((cp) => (
                 <div
                   key={cp.id}
                   className={`p-5 rounded-2xl border transition-all space-y-3 ${
                     cp.isPrimary
+<<<<<<< HEAD
                       ? 'bg-slate-900/90 border-orange-500/40 shadow-[0_0_15px_rgba(255,107,0,0.1)]'
+=======
+                      ? 'bg-slate-900/90 border-orange-500/40 shadow-lg shadow-orange-500/5'
+>>>>>>> 51282b6 (Initial commit)
                       : 'bg-slate-900/40 border-white/5 hover:border-white/15'
                   }`}
                 >
@@ -325,7 +417,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                       <div className="flex items-center gap-2 flex-wrap">
                         <h5 className="text-xs font-bold text-white">{cp.name}</h5>
                         {cp.isPrimary && (
+<<<<<<< HEAD
                           <span className="px-2 py-0.5 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-300 text-[9px] font-bold uppercase">
+=======
+                          <span className="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 text-[9px] font-bold uppercase">
+>>>>>>> 51282b6 (Initial commit)
                             Primary Vault
                           </span>
                         )}
@@ -333,11 +429,19 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                       <p className="text-[11px] text-slate-400 mt-0.5">{cp.providerType} • {cp.autoSyncInterval}</p>
                     </div>
 
+<<<<<<< HEAD
                     <div className="flex items-center gap-1.5 shrink-0">
                       <button
                         type="button"
                         onClick={() => handleOpenCloudModal(cp)}
                         className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 cursor-pointer transition-all active:scale-95"
+=======
+                    <div className="flex items-center gap-1 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => handleOpenCloudModal(cp)}
+                        className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
                         title="Edit Configuration"
                       >
                         <Edit2 size={13} />
@@ -346,7 +450,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                         <button
                           type="button"
                           onClick={() => handleDeleteCloudProvider(cp.id)}
+<<<<<<< HEAD
                           className="p-2 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 cursor-pointer transition-all active:scale-95"
+=======
+                          className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
                           title="Delete Provider"
                         >
                           <Trash2 size={13} />
@@ -355,6 +463,10 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                     </div>
                   </div>
 
+<<<<<<< HEAD
+=======
+                  {/* Details Strip */}
+>>>>>>> 51282b6 (Initial commit)
                   <div className="p-3 rounded-xl bg-slate-950/70 border border-white/5 space-y-1.5 font-mono text-[11px]">
                     <div className="flex justify-between text-slate-400">
                       <span>Folder / Bucket:</span>
@@ -386,7 +498,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* 3. Offline Optimization & Maintenance Controls[cite: 14] */}
+=======
+          {/* 3. Offline Optimization & Maintenance Controls */}
+>>>>>>> 51282b6 (Initial commit)
           <div className="space-y-4 pt-4 border-t border-white/10">
             <h4 className="text-xs font-bold text-orange-400 uppercase tracking-wider flex items-center gap-2">
               <Activity size={15} />
@@ -415,11 +531,18 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                   <h5 className="text-xs font-bold text-white">Application Cache Buffer</h5>
                   <p className="text-[11px] text-slate-400">Purge stale query caches & optimize query speed</p>
                 </div>
+<<<<<<< HEAD
                 {/* Glowing Flush Cache Button */}
                 <button
                   type="button"
                   onClick={handleClearCache}
                   className="px-4 py-2 bg-gradient-to-r from-amber-500/15 to-orange-500/15 hover:from-amber-500/25 hover:to-orange-500/25 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-bold shadow-[0_0_12px_rgba(245,158,11,0.2)] cursor-pointer transition-all active:scale-95"
+=======
+                <button
+                  type="button"
+                  onClick={handleClearCache}
+                  className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/20 rounded-xl text-xs font-bold cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
                 >
                   Flush Cache
                 </button>
@@ -449,11 +572,19 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* Master Save Footer[cite: 14] */}
           <div className="flex justify-end pt-3 border-t border-white/10">
             <button
               type="submit"
               className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white text-xs font-bold rounded-2xl shadow-[0_0_20px_rgba(255,107,0,0.45)] border border-white/20 cursor-pointer transition-all active:scale-95"
+=======
+          {/* Footer Save Button */}
+          <div className="flex justify-end pt-3 border-t border-white/10">
+            <button
+              type="submit"
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white text-xs font-bold rounded-2xl shadow-lg shadow-orange-500/25 cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
             >
               <Save size={15} />
               <span>Save & Apply Advanced Architecture</span>
@@ -461,9 +592,16 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
           </div>
 
         </div>
+<<<<<<< HEAD
       </form>
 
       {/* Cloud Modal[cite: 14] */}
+=======
+
+      </form>
+
+      {/* Add / Edit Cloud Provider Modal */}
+>>>>>>> 51282b6 (Initial commit)
       {isCloudModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
           <div className="glass-panel w-full max-w-xl p-6 rounded-3xl border border-white/25 shadow-2xl space-y-4">
@@ -564,7 +702,11 @@ export default function AdvancedSettingsTab({ onTriggerSuccess }) {
                 </button>
                 <button
                   type="submit"
+<<<<<<< HEAD
                   className="px-5 py-2 bg-gradient-to-r from-[#ff6b00] to-[#f43f5e] hover:from-[#ff7b1a] hover:to-[#f54f6e] text-white rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(255,107,0,0.4)] border border-white/20 cursor-pointer transition-all active:scale-95"
+=======
+                  className="px-5 py-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
                 >
                   {editingCloudId ? 'Update Cloud Storage' : 'Save Cloud Provider'}
                 </button>

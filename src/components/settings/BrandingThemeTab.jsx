@@ -5,14 +5,22 @@ import {
   RefreshCw, Layers, ShieldCheck
 } from 'lucide-react';
 
+<<<<<<< HEAD
 export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSaveProfile }) {
+=======
+export default function BrandingThemeTab({ onTriggerSuccess }) {
+>>>>>>> 51282b6 (Initial commit)
   const logoInputRef = useRef(null);
   const faviconInputRef = useRef(null);
   const watermarkInputRef = useRef(null);
 
   // 1. Theme Mode State (Dark / Light)
   const [themeMode, setThemeMode] = useState(() => {
+<<<<<<< HEAD
     return churchProfile?.themeMode || localStorage.getItem('app_theme_mode') || 'dark';
+=======
+    return localStorage.getItem('app_theme_mode') || 'dark';
+>>>>>>> 51282b6 (Initial commit)
   });
 
   // 2. Signature Color Presets for Dark & Light
@@ -32,7 +40,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
   ];
 
   const [selectedAccent, setSelectedAccent] = useState(() => {
+<<<<<<< HEAD
     return churchProfile?.accentColorId || localStorage.getItem('app_accent_color') || 'sunset_orange';
+=======
+    return localStorage.getItem('app_accent_color') || 'sunset_orange';
+>>>>>>> 51282b6 (Initial commit)
   });
 
   // 3. Branding Titles & Global Labels State
@@ -41,10 +53,19 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
     if (saved) {
       try {
         return JSON.parse(saved);
+<<<<<<< HEAD
       } catch (e) {}
     }
     return {
       portalTitle: churchProfile?.systemBrand || 'Nope Search Cathedral Management System',
+=======
+      } catch (e) {
+        // fallback
+      }
+    }
+    return {
+      portalTitle: 'Nope Search Cathedral Management System',
+>>>>>>> 51282b6 (Initial commit)
       shortTagline: 'Equipping Saints, Impacting Nations',
       footerCopyright: '© 2026 Nope Search Cathedral Trust. All Rights Reserved.',
       glassmorphismBlur: 'Heavy Blur (Glass)',
@@ -65,7 +86,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
       reader.onload = () => {
         setChurchLogo(reader.result);
         localStorage.setItem('app_logo', reader.result);
+<<<<<<< HEAD
         if (onTriggerSuccess) onTriggerSuccess('Church Official Logo updated and saved!');
+=======
+        onTriggerSuccess('Church Official Logo updated and saved!');
+>>>>>>> 51282b6 (Initial commit)
       };
       reader.readAsDataURL(file);
     }
@@ -78,7 +103,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
       reader.onload = () => {
         setChurchFavicon(reader.result);
         localStorage.setItem('app_favicon', reader.result);
+<<<<<<< HEAD
         if (onTriggerSuccess) onTriggerSuccess('Browser Favicon updated and saved!');
+=======
+        onTriggerSuccess('Browser Favicon updated and saved!');
+>>>>>>> 51282b6 (Initial commit)
       };
       reader.readAsDataURL(file);
     }
@@ -91,12 +120,17 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
       reader.onload = () => {
         setChurchWatermark(reader.result);
         localStorage.setItem('app_watermark', reader.result);
+<<<<<<< HEAD
         if (onTriggerSuccess) onTriggerSuccess('Official Letterhead Watermark updated!');
+=======
+        onTriggerSuccess('Official Letterhead Watermark updated!');
+>>>>>>> 51282b6 (Initial commit)
       };
       reader.readAsDataURL(file);
     }
   };
 
+<<<<<<< HEAD
   // ✅ 100% WORKING MASTER SAVE HANDLER
   const handleSaveAll = (e) => {
   if (e) {
@@ -133,6 +167,18 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
   }
 };
 
+=======
+  // Master Save Handler
+  const handleSaveAll = (e) => {
+    if (e) e.preventDefault();
+    localStorage.setItem('app_theme_mode', themeMode);
+    localStorage.setItem('app_accent_color', selectedAccent);
+    localStorage.setItem('app_brand_config', JSON.stringify(brandConfig));
+
+    onTriggerSuccess('All Branding, Themes & Global Header settings saved to database!');
+  };
+
+>>>>>>> 51282b6 (Initial commit)
   const activePresets = themeMode === 'dark' ? darkThemePresets : lightThemePresets;
   const currentAccentObj = activePresets.find(p => p.id === selectedAccent) || activePresets[0];
 
@@ -141,7 +187,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
       <form onSubmit={handleSaveAll} className="space-y-6">
 
         {/* 1. THEME MODE & COLOR PALETTES */}
+<<<<<<< HEAD
         <div className="glass-card rounded-3xl p-8 space-y-6 bg-slate-900/60 border border-white/10">
+=======
+        <div className="glass-card rounded-3xl p-8 space-y-6">
+>>>>>>> 51282b6 (Initial commit)
           <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
@@ -155,7 +205,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
 
             <div className="flex items-center gap-3">
               {/* Dark / Light Toggle Switcher */}
+<<<<<<< HEAD
               <div className="flex items-center p-1 rounded-2xl bg-slate-950 border border-white/10">
+=======
+              <div className="flex items-center p-1 rounded-2xl bg-slate-900/90 border border-white/10">
+>>>>>>> 51282b6 (Initial commit)
                 <button
                   type="button"
                   onClick={() => {
@@ -189,10 +243,16 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
                 </button>
               </div>
 
+<<<<<<< HEAD
               {/* Working Save Button */}
               <button
                 type="submit"
                 className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer active:scale-95 transition-all shrink-0"
+=======
+              <button
+                type="submit"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
+>>>>>>> 51282b6 (Initial commit)
               >
                 <Save size={15} />
                 <span>Save All Changes</span>
@@ -219,11 +279,19 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
                     key={theme.id}
                     onClick={() => {
                       setSelectedAccent(theme.id);
+<<<<<<< HEAD
                       if (onTriggerSuccess) onTriggerSuccess(`Color preset selected: ${theme.name}`);
                     }}
                     className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-3 ${
                       isSelected
                         ? 'bg-slate-900/90 border-orange-500 shadow-xl scale-[1.02] ring-2 ring-orange-500/30'
+=======
+                      onTriggerSuccess(`Color preset selected: ${theme.name}`);
+                    }}
+                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-3 ${
+                      isSelected
+                        ? 'bg-slate-900/90 border-white/40 shadow-xl scale-[1.02] ring-2 ring-white/20'
+>>>>>>> 51282b6 (Initial commit)
                         : 'bg-slate-900/40 border-white/5 hover:border-white/20'
                     }`}
                   >
@@ -313,7 +381,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
         </div>
 
         {/* 2. OFFICIAL LOGOS & ASSETS */}
+<<<<<<< HEAD
         <div className="glass-card rounded-3xl p-8 space-y-6 bg-slate-900/60 border border-white/10">
+=======
+        <div className="glass-card rounded-3xl p-8 space-y-6">
+>>>>>>> 51282b6 (Initial commit)
           <div className="border-b border-white/10 pb-4">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <ImageIcon className="text-orange-400" size={20} />
@@ -389,7 +461,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
         </div>
 
         {/* 3. GLOBAL TITLES & FOOTER COPYRIGHT */}
+<<<<<<< HEAD
         <div className="glass-card rounded-3xl p-8 space-y-6 bg-slate-900/60 border border-white/10">
+=======
+        <div className="glass-card rounded-3xl p-8 space-y-6">
+>>>>>>> 51282b6 (Initial commit)
           <div className="border-b border-white/10 pb-4">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <Sliders className="text-orange-400" size={20} />
@@ -434,7 +510,11 @@ export default function BrandingThemeTab({ onTriggerSuccess, churchProfile, onSa
           <div className="flex justify-end pt-3 border-t border-white/10">
             <button
               type="submit"
+<<<<<<< HEAD
               className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white text-xs font-bold rounded-2xl shadow-lg shadow-orange-500/25 cursor-pointer active:scale-95 transition-all"
+=======
+              className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white text-xs font-bold rounded-2xl shadow-lg shadow-orange-500/25 cursor-pointer"
+>>>>>>> 51282b6 (Initial commit)
             >
               <Save size={15} />
               <span>Save & Apply Changes</span>

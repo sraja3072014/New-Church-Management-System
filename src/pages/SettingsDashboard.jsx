@@ -30,9 +30,14 @@ import ServiceRequestsTab from '../components/settings/ServiceRequestsTab';
 import BackupSettingsTab from '../components/settings/BackupSettingsTab';
 import AdvancedSettingsTab from '../components/settings/AdvancedSettingsTab';
 
+<<<<<<< HEAD
 // 1. Props-ல் churchProfile மற்றும் onSaveProfile சேர்க்கப்பட்டுள்ளது
 export default function SettingsDashboard({ churchProfile, onSaveProfile }) {
   const [activeSubMenu, setActiveSubMenu] = useState('branding');
+=======
+export default function SettingsDashboard() {
+  const [activeSubMenu, setActiveSubMenu] = useState('main_church');
+>>>>>>> 51282b6 (Initial commit)
   const [saveSuccessMsg, setSaveSuccessMsg] = useState('');
 
   const triggerSuccess = (msg) => {
@@ -89,7 +94,11 @@ export default function SettingsDashboard({ churchProfile, onSaveProfile }) {
   ];
 
   return (
+<<<<<<< HEAD
     <div className="flex flex-1 w-full h-full min-h-screen bg-transparent text-slate-200 overflow-hidden">
+=======
+    <div className="flex flex-1 w-full h-full min-h-screen bg-[#0e1322] text-slate-200 overflow-hidden">
+>>>>>>> 51282b6 (Initial commit)
       
       {/* Settings Sub-Sidebar with Grouped Card Boxes */}
       <div className="w-60 bg-[#0e1322]/85 backdrop-blur-xl border-r border-white/10 p-3 space-y-3.5 overflow-y-auto max-h-screen shrink-0 shadow-[inset_0_0_25px_rgba(255,107,0,0.05),0_0_30px_rgba(255,107,0,0.08)]">
@@ -143,7 +152,11 @@ export default function SettingsDashboard({ churchProfile, onSaveProfile }) {
         )}
 
         <div className="w-full">
+<<<<<<< HEAD
           {activeSubMenu === 'main_church' && <MainChurchTab onTriggerSuccess={triggerSuccess} churchProfile={churchProfile} onSaveProfile={onSaveProfile} />}
+=======
+          {activeSubMenu === 'main_church' && <MainChurchTab onTriggerSuccess={triggerSuccess} />}
+>>>>>>> 51282b6 (Initial commit)
           {activeSubMenu === 'branches' && <BranchesTab onTriggerSuccess={triggerSuccess} />}
           {activeSubMenu === 'users' && <UsersSettingsTab onTriggerSuccess={triggerSuccess} />}
           {activeSubMenu === 'registration' && <MemberRegistrationTab onTriggerSuccess={triggerSuccess} />}
@@ -156,6 +169,7 @@ export default function SettingsDashboard({ churchProfile, onSaveProfile }) {
           {activeSubMenu === 'tax' && <TaxReceiptsTab onTriggerSuccess={triggerSuccess} />}
           {activeSubMenu === 'reports_config' && <ReportsConfigTab onTriggerSuccess={triggerSuccess} />}
           {activeSubMenu === 'modules' && <ModulesRulesTab onTriggerSuccess={triggerSuccess} />}
+<<<<<<< HEAD
           
           {/* Safe Branding Theme Tab Injection */}
           {activeSubMenu === 'branding' && (
@@ -166,6 +180,9 @@ export default function SettingsDashboard({ churchProfile, onSaveProfile }) {
             />
           )}
 
+=======
+          {activeSubMenu === 'branding' && <BrandingThemeTab onTriggerSuccess={triggerSuccess} />}
+>>>>>>> 51282b6 (Initial commit)
           {activeSubMenu === 'member_app' && <MemberAppConfigTab onTriggerSuccess={triggerSuccess} />}
           {activeSubMenu === 'preferences' && <PreferencesTab onTriggerSuccess={triggerSuccess} />}
           {activeSubMenu === 'notifications' && <NotificationsTab onTriggerSuccess={triggerSuccess} />}

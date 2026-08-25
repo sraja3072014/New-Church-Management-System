@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { 
+<<<<<<< HEAD
   Plus, Search, Edit2, Trash2, X, Check,
   Globe, Landmark, GitBranch, Star, ShieldCheck, Eye, EyeOff, Lock
 } from 'lucide-react';
@@ -74,6 +75,73 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
       requirePastorOtpForFcraView: true
     };
   });
+=======
+  Building, Plus, Search, Edit2, Trash2, X, Check,
+  QrCode, CreditCard, ShieldCheck, Star, Globe, Landmark, GitBranch
+} from 'lucide-react';
+
+export default function BankAccountsTab({ onTriggerSuccess }) {
+  const [activeCategoryTab, setActiveCategoryTab] = useState('all'); // all, main_hq, branches, fcra_trust
+
+  const [bankAccounts, setBankAccounts] = useState([
+    {
+      id: 1,
+      accountName: 'Nope Search Main Cathedral Trust A/C',
+      accountCategory: 'main_hq',
+      bankName: 'State Bank of India (SBI)',
+      accountNumber: '38492019283',
+      ifscCode: 'SBIN0001234',
+      branchName: 'Koduvai Branch',
+      accountType: 'Current Account',
+      upiId: 'nopechurch@sbi',
+      isPrimary: true,
+      campus: 'Nope Search Main Cathedral (HQ)',
+      purposeTag: 'Main Operating Fund'
+    },
+    {
+      id: 2,
+      accountName: 'Nope Cathedral FCRA Designated Account',
+      accountCategory: 'fcra_trust',
+      bankName: 'State Bank of India (SBI NDMB)',
+      accountNumber: '40192839102',
+      ifscCode: 'SBIN0000691',
+      branchName: 'New Delhi Main Branch (NDMB, Parliament St)',
+      accountType: 'FCRA Designated Foreign Account',
+      upiId: '',
+      isPrimary: false,
+      campus: 'National / International (MHA Approved)',
+      purposeTag: 'FCRA Foreign Contributions'
+    },
+    {
+      id: 3,
+      accountName: 'Koduvai Town Branch Local Ministry A/C',
+      accountCategory: 'branches',
+      bankName: 'HDFC Bank',
+      accountNumber: '50100293849102',
+      ifscCode: 'HDFC0004321',
+      branchName: 'Tirupur South',
+      accountType: 'Savings Account',
+      upiId: 'koduvai.church@hdfcbank',
+      isPrimary: false,
+      campus: 'Koduvai Town Branch',
+      purposeTag: 'Branch Local Expenses'
+    },
+    {
+      id: 4,
+      accountName: 'Church Educational & Charity Trust A/C',
+      accountCategory: 'fcra_trust',
+      bankName: 'Canara Bank',
+      accountNumber: '120938491023',
+      ifscCode: 'CNRB0002819',
+      branchName: 'Kangeyam',
+      accountType: 'Trust Society Account',
+      upiId: 'nopecharity@cnrb',
+      isPrimary: false,
+      campus: 'All Campuses (Charity Wing)',
+      purposeTag: 'Social Welfare & Education'
+    }
+  ]);
+>>>>>>> 51282b6 (Initial commit)
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,13 +158,18 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
     upiId: '',
     isPrimary: false,
     campus: 'Nope Search Main Cathedral (HQ)',
+<<<<<<< HEAD
     purposeTag: '',
     allowHqCentralAudit: true
+=======
+    purposeTag: ''
+>>>>>>> 51282b6 (Initial commit)
   });
 
   const handleOpenModal = (item = null) => {
     if (item) {
       setEditingId(item.id);
+<<<<<<< HEAD
       setFormData({
         accountName: item.accountName || '',
         accountCategory: item.accountCategory || 'main_hq',
@@ -111,6 +184,9 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
         purposeTag: item.purposeTag || '',
         allowHqCentralAudit: item.allowHqCentralAudit ?? true
       });
+=======
+      setFormData({ ...item });
+>>>>>>> 51282b6 (Initial commit)
     } else {
       setEditingId(null);
       setFormData({
@@ -124,13 +200,18 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
         upiId: '',
         isPrimary: false,
         campus: 'Nope Search Main Cathedral (HQ)',
+<<<<<<< HEAD
         purposeTag: '',
         allowHqCentralAudit: true
+=======
+        purposeTag: ''
+>>>>>>> 51282b6 (Initial commit)
       });
     }
     setIsModalOpen(true);
   };
 
+<<<<<<< HEAD
   const handleSaveAccount = (e) => {
     e.preventDefault();
     if (!formData.accountName.trim() || !formData.accountNumber.trim()) return;
@@ -147,19 +228,39 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
 
     setBankAccounts(updatedList);
     localStorage.setItem('app_bank_accounts_data', JSON.stringify(updatedList));
+=======
+  const handleSave = (e) => {
+    e.preventDefault();
+    if (!formData.accountName || !formData.accountNumber || !formData.ifscCode) return;
+
+    if (editingId) {
+      setBankAccounts(bankAccounts.map(b => b.id === editingId ? { ...formData, id: b.id } : b));
+      onTriggerSuccess('Bank Account details updated successfully!');
+    } else {
+      const newAcc = { ...formData, id: Date.now() };
+      setBankAccounts([...bankAccounts, newAcc]);
+      onTriggerSuccess('New Church Bank / Trust Account registered!');
+    }
+>>>>>>> 51282b6 (Initial commit)
     setIsModalOpen(false);
   };
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this bank record?")) {
+<<<<<<< HEAD
       const updatedList = bankAccounts.filter(b => b.id !== id);
       setBankAccounts(updatedList);
       localStorage.setItem('app_bank_accounts_data', JSON.stringify(updatedList));
       onTriggerSuccess?.('Bank account removed.');
+=======
+      setBankAccounts(bankAccounts.filter(b => b.id !== id));
+      onTriggerSuccess('Bank account removed.');
+>>>>>>> 51282b6 (Initial commit)
     }
   };
 
   const handleSetPrimary = (id) => {
+<<<<<<< HEAD
     const updatedList = bankAccounts.map(b => ({
       ...b,
       isPrimary: b.id === id
@@ -172,6 +273,13 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
   const handleSavePolicy = () => {
     localStorage.setItem('app_bank_privacy_policy', JSON.stringify(bankPrivacyPolicy));
     onTriggerSuccess?.('Main Church HQ Oversight & Branch Audit Policy saved!');
+=======
+    setBankAccounts(bankAccounts.map(b => ({
+      ...b,
+      isPrimary: b.id === id
+    })));
+    onTriggerSuccess('Primary operating bank account updated!');
+>>>>>>> 51282b6 (Initial commit)
   };
 
   const filteredAccounts = bankAccounts
@@ -181,6 +289,7 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                  b.campus.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
+<<<<<<< HEAD
     <div className="space-y-6 animate-fadeIn pb-10">
 
       {/* 1. MAIN CHURCH HQ OVERSIGHT & BRANCH AUDIT PRIVACY POLICY */}
@@ -237,6 +346,12 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
       {/* 2. BANK ACCOUNTS DIRECTORY */}
       <div className="glass-card rounded-3xl p-8 space-y-6">
         
+=======
+    <div className="space-y-6 animate-fadeIn">
+      <div className="glass-card rounded-3xl p-8 space-y-6">
+        
+        {/* Top Header */}
+>>>>>>> 51282b6 (Initial commit)
         <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-xl font-bold text-white flex items-center gap-2">
@@ -244,12 +359,19 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
               Church Multi-Campus & Trust Banking Hub
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
+<<<<<<< HEAD
               Manage Headquarters operational accounts, Satellite Branch bank ledgers, and Delhi FCRA foreign accounts[cite: 6]
+=======
+              Manage Headquarters operational accounts, Satellite Branch bank ledgers, and Delhi FCRA foreign accounts
+>>>>>>> 51282b6 (Initial commit)
             </p>
           </div>
 
           <button
+<<<<<<< HEAD
             type="button"
+=======
+>>>>>>> 51282b6 (Initial commit)
             onClick={() => handleOpenModal()}
             className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-orange-500/25 cursor-pointer shrink-0"
           >
@@ -258,7 +380,11 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
           </button>
         </div>
 
+<<<<<<< HEAD
         {/* Category Filters */}
+=======
+        {/* Category Filter Tabs */}
+>>>>>>> 51282b6 (Initial commit)
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-white/5 overflow-x-auto w-full sm:w-auto">
             {[
@@ -269,7 +395,10 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
             ].map(tab => (
               <button
                 key={tab.id}
+<<<<<<< HEAD
                 type="button"
+=======
+>>>>>>> 51282b6 (Initial commit)
                 onClick={() => setActiveCategoryTab(tab.id)}
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-2 ${
                   activeCategoryTab === tab.id
@@ -297,7 +426,11 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Cards Grid */}
+=======
+        {/* Bank Account Cards Grid */}
+>>>>>>> 51282b6 (Initial commit)
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredAccounts.map((acc) => (
             <div
@@ -316,12 +449,20 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                     <h4 className="text-sm font-bold text-white">{acc.accountName}</h4>
                     {acc.isPrimary && (
                       <span className="px-2 py-0.5 rounded-full bg-orange-500/20 border border-orange-500/30 text-[9px] font-bold text-orange-300 uppercase">
+<<<<<<< HEAD
                         Primary HQ[cite: 6]
+=======
+                        Primary HQ
+>>>>>>> 51282b6 (Initial commit)
                       </span>
                     )}
                     {acc.accountCategory === 'fcra_trust' && (
                       <span className="px-2 py-0.5 rounded-full bg-purple-500/20 border border-purple-500/30 text-[9px] font-bold text-purple-300 uppercase flex items-center gap-1">
+<<<<<<< HEAD
                         <Globe size={10} /> FCRA / Trust[cite: 6]
+=======
+                        <Globe size={10} /> FCRA / Trust
+>>>>>>> 51282b6 (Initial commit)
                       </span>
                     )}
                   </div>
@@ -330,6 +471,7 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
 
                 <div className="flex items-center gap-1.5 shrink-0">
                   <button
+<<<<<<< HEAD
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -351,11 +493,30 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                       title="Delete Account"
                     >
                       <Trash2 size={14} />
+=======
+                    onClick={() => handleOpenModal(acc)}
+                    className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 cursor-pointer"
+                    title="Edit Details"
+                  >
+                    <Edit2 size={13} />
+                  </button>
+                  {!acc.isPrimary && (
+                    <button
+                      onClick={() => handleDelete(acc.id)}
+                      className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 cursor-pointer"
+                      title="Delete Account"
+                    >
+                      <Trash2 size={13} />
+>>>>>>> 51282b6 (Initial commit)
                     </button>
                   )}
                 </div>
               </div>
 
+<<<<<<< HEAD
+=======
+              {/* Bank Details Table Strip */}
+>>>>>>> 51282b6 (Initial commit)
               <div className="p-3.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-2 font-mono text-xs">
                 <div className="flex justify-between text-slate-400">
                   <span>A/C Number:</span>
@@ -366,6 +527,7 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                   <span className="text-slate-200">{acc.ifscCode}</span>
                 </div>
                 <div className="flex justify-between text-slate-400">
+<<<<<<< HEAD
                   <span>HQ Central Audit:</span>
                   <span className={acc.allowHqCentralAudit ? 'text-emerald-400 font-sans' : 'text-slate-400 font-sans'}>
                     {acc.allowHqCentralAudit ? '● Central Audit Enabled' : '○ Branch Private Only'}
@@ -373,6 +535,14 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                 </div>
               </div>
 
+=======
+                  <span>UPI ID:</span>
+                  <span className="text-emerald-400 font-sans">{acc.upiId || 'Not Configured (Wire Transfer Only)'}</span>
+                </div>
+              </div>
+
+              {/* Footer Meta */}
+>>>>>>> 51282b6 (Initial commit)
               <div className="flex items-center justify-between pt-1 text-[11px]">
                 <span className="text-slate-400 flex items-center gap-1">
                   <GitBranch size={12} className="text-orange-400" />
@@ -381,7 +551,10 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
 
                 {!acc.isPrimary && acc.accountCategory === 'main_hq' && (
                   <button
+<<<<<<< HEAD
                     type="button"
+=======
+>>>>>>> 51282b6 (Initial commit)
                     onClick={() => handleSetPrimary(acc.id)}
                     className="text-orange-400 hover:text-orange-300 font-semibold cursor-pointer flex items-center gap-1"
                   >
@@ -394,21 +567,33 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
         </div>
       </div>
 
+<<<<<<< HEAD
       {/* MODAL */}
+=======
+      {/* Add / Edit Bank Modal */}
+>>>>>>> 51282b6 (Initial commit)
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
           <div className="glass-panel w-full max-w-xl p-6 rounded-3xl border border-white/25 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <h3 className="text-base font-bold text-white flex items-center gap-2">
                 <Landmark className="text-orange-400" size={18} />
+<<<<<<< HEAD
                 {editingId ? 'Edit Bank Account Record' : 'Register Church Bank / FCRA Account'}
+=======
+                {editingId ? 'Edit Bank Account' : 'Register Church Bank / FCRA Account'}
+>>>>>>> 51282b6 (Initial commit)
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-white cursor-pointer">
                 <X size={18} />
               </button>
             </div>
 
+<<<<<<< HEAD
             <form onSubmit={handleSaveAccount} className="space-y-3.5">
+=======
+            <form onSubmit={handleSave} className="space-y-3.5">
+>>>>>>> 51282b6 (Initial commit)
               <div>
                 <label className="text-xs text-slate-300 font-medium">Account Title / Trust Name *</label>
                 <input
@@ -440,7 +625,11 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                   <input
                     type="text"
                     required
+<<<<<<< HEAD
                     placeholder="e.g. State Bank of India"
+=======
+                    placeholder="e.g. State Bank of India (NDMB)"
+>>>>>>> 51282b6 (Initial commit)
                     value={formData.bankName}
                     onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
                     className="w-full bg-slate-900/80 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white mt-1 focus:outline-none"
@@ -494,7 +683,11 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                 </div>
 
                 <div>
+<<<<<<< HEAD
                   <label className="text-xs text-slate-300 font-medium">Campus Linkage</label>
+=======
+                  <label className="text-xs text-slate-300 font-medium">Campus / Trust Linkage</label>
+>>>>>>> 51282b6 (Initial commit)
                   <select
                     value={formData.campus}
                     onChange={(e) => setFormData({ ...formData, campus: e.target.value })}
@@ -504,6 +697,10 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                     <option value="Koduvai Town Branch">Koduvai Town Branch</option>
                     <option value="Kangeyam City Branch">Kangeyam City Branch</option>
                     <option value="National / International (MHA Approved)">National / International (MHA Approved)</option>
+<<<<<<< HEAD
+=======
+                    <option value="All Campuses (Charity Wing)">All Campuses (Charity Wing)</option>
+>>>>>>> 51282b6 (Initial commit)
                   </select>
                 </div>
 
@@ -519,6 +716,7 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                 </div>
               </div>
 
+<<<<<<< HEAD
               <div className="pt-2 border-t border-white/10">
                 <label className="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer">
                   <input
@@ -531,6 +729,8 @@ export default function BankAccountsTab({ onTriggerSuccess }) {
                 </label>
               </div>
 
+=======
+>>>>>>> 51282b6 (Initial commit)
               <div className="flex justify-end gap-2.5 pt-3 border-t border-white/10">
                 <button
                   type="button"
